@@ -1,0 +1,52 @@
+/*  レストラン  */
+#restaurant {
+    .wrapper {
+        margin: 0 0 100px;
+    }
+
+    .restaurant-group {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        .restaurant-group--left {
+            width: 30%;
+            overflow: hidden;
+            &:hover .restaurant-slide {
+                animation-play-state: paused;
+            }
+
+            .restaurant-slide {
+                display: flex;
+                animation: loop_slide 20s infinite linear 1s both;
+            }
+        }
+
+        .restaurant-group--center {
+            width: 40%;
+            margin: 0 10px;
+        }
+
+        .restaurant-group--right {
+            width: 30%;
+            overflow: hidden;
+            &:hover .restaurant-slide {
+                animation-play-state: paused;
+            }
+
+            .restaurant-slide {
+                display: flex;
+                animation: loop_slide 20s infinite linear 1s both;
+            }
+        }
+
+        @keyframes loop_slide {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    }
+}

@@ -1,0 +1,37 @@
+#spa {
+    overflow: hidden;
+    .wrapper {
+        margin: 0 0 100px;
+    }
+
+    .spa-main--group {
+        display: flex;
+        justify-content: space-around;
+        .spa-main--img.fade {
+            &:first-child {
+                opacity: 0;
+                transform: translateX(150px);
+            }
+            &:last-child {
+                opacity: 0;
+                transform: translateX(-150px);
+            }
+        }
+        .spa-main--img.fade.in {
+            &:first-child {
+                opacity: 1;
+                transform: translateX(0px);
+            }
+            &:last-child {
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+        .spa-main--text {
+            writing-mode: vertical-lr;
+            font-size: 40px;
+            opacity: 0;
+            animation: appearText 4s forwards;
+        }
+    }
+}

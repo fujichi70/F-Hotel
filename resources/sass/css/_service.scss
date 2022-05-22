@@ -1,0 +1,56 @@
+#service {
+    .wrapper {
+        margin: 0 0 100px;
+    }
+    .service-text {
+        margin-bottom: 40px;
+    }
+
+    .services-box {
+        display: flex;
+        margin: 0 20px;
+        .services-parts {
+            position: relative;
+            margin-bottom: 30px;
+            .service-img {
+                text-align: center;
+            }
+            .services-title {
+                position: absolute;
+                top: 15px;
+                left: 0;
+
+                span {
+                    line-height: 0px;
+                    display: block;
+                    &:first-child {
+                        font-size: 100px;
+                    }
+                    &:last-child {
+                        font-size: 50px;
+                        margin-top: 10px;
+                        margin-left: 60px;
+                    }
+                }
+            }
+            p {
+                font-size: 17px;
+            }
+
+            ul {
+                margin-top: 5px;
+                padding-left: 30px;
+                font-size: 17px;
+            }
+            li {
+                list-style: square;
+            }
+        }
+    }
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+        gap: 30px;
+    }
+
+}

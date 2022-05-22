@@ -1,0 +1,107 @@
+.user-title {
+    color: rgb(0, 75, 50);
+    text-align: center;
+    font-size: 20px;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    text-decoration: none;
+    color: rgb(0, 75, 50);
+    font-size: 17px;
+    border-radius: 5px;
+    width: 200px;
+    height: 40px;
+    border: 1px solid rgb(0, 75, 50);
+    position: relative;
+    transition: 0.3s;
+    background-color: #ffffff00;
+    &::before,
+    &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        transform-origin: 100% 50%;
+        height: 1px;
+        width: 11px;
+        background-color: rgb(0, 75, 50);
+        border-radius: 2px;
+        will-change: transform;
+    }
+	&:hover {
+		transform: scale(1.1);
+	}
+
+    &::before {
+        transform: translateY(-50%) rotate(30deg);
+    }
+
+    &::after {
+        transform: translateY(-50%) rotate(-30deg);
+    }
+
+    &:hover::before {
+        // transform: translate(5px, -50%) rotate(30deg);
+		animation: arrowAnime01 1s both infinite;
+    }
+	
+    &:hover::after {
+		// transform: translate(5px, -50%) rotate(-30deg);
+		animation: arrowAnime02 1s both infinite;
+    }
+
+    @keyframes arrowAnime01 {
+        0%,100% {
+            transform: translateY(-50%) rotate(30deg);
+        }
+
+        50% {
+            transform: translate(5px, -50%) rotate(30deg);
+        }
+    }
+
+    @keyframes arrowAnime02 {
+        0%, 100% {
+        transform: translateY(-50%) rotate(-30deg);
+        }
+
+        50% {
+        transform: translate(5px, -50%) rotate(-30deg);
+        }
+    }
+}
+
+#user-auth {
+    .wrapper {
+        margin: 50px 30px;
+    }
+
+    .auth {
+        background-color: #fff;
+        box-shadow: 3px 3px 1px gray;
+        margin: 50px auto 0;
+        padding: 0 30px;
+        border-radius: 5px;
+        max-width: 1000px;
+        height: 500px;
+        .login {
+            position: absolute;
+            top: 50%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+            margin: 20px;
+        }
+        .register {
+            position: absolute;
+            top: 50%;
+            right: 30%;
+            transform: translate(50%, -50%);
+            margin: 20px;
+        }
+    }
+}

@@ -1,0 +1,113 @@
+#access {
+    background: rgb(0, 51, 35);
+    color: antiquewhite;
+    padding: 100px 0;
+
+    .access-googlemap--group {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 100px;
+
+        .access-googlemap--box {
+            position: relative;
+            width: 70%;
+            .aceess-googlemap--parts {
+                height: 0;
+                padding-top: 56.25%;
+                .access-googlemap {
+                    position: absolute;
+                    top: 0;
+                    left: 5%;
+                    width: 95%;
+                    height: 100%;
+                }
+            }
+        }
+    }
+
+    .access-detail {
+        width: 50%;
+        flex-direction: row-reverse;
+        justify-content: space-around;
+
+        .access-text--group {
+            text-align: center;
+            letter-spacing: 2px;
+            margin-bottom: 60px;
+            .access-text--name {
+                margin-bottom: 40px;
+            }
+            .access-text--parts {
+                display: inline-block;
+                text-align: left;
+                .access-text--detail {
+                    margin-bottom: 10px;
+                    padding-bottom: 10px;
+                    border-bottom: 1px solid antiquewhite;
+                }
+            }
+        }
+
+        .access-hokkaidomap--parts {
+            text-align: center;
+            margin: 150px 0 30px;
+            .access-hokkaidomap {
+                width: 350px;
+            }
+        }
+    }
+
+    .access-img--parts {
+        text-align: center;
+        .access-img {
+            max-width: 100%;
+        }
+        .access-sp-img {
+            display: none;
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        .access-googlemap--group {
+            flex-direction: column;
+
+            .access-googlemap--box {
+                position: relative;
+                width: 90%;
+                .aceess-googlemap--parts {
+                    height: 0;
+                    padding-top: 56.25%;
+                    .access-googlemap {
+                        left: 8%;
+                    }
+                }
+            }
+        }
+
+        .access-detail {
+            .access-text--group {
+                .access-text--name {
+                    margin-top: 60px;
+                }
+            }
+
+            .access-hokkaidomap--parts {
+                margin: 100px 0 30px;
+            }
+        }
+
+        .access-detail {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .access-img--parts {
+            .access-img {
+                display: none;
+            }
+            .access-sp-img {
+                display: initial;
+            }
+        }
+    }
+}

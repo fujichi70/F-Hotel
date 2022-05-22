@@ -1,0 +1,83 @@
+/*   news   */
+#news {
+    .wrapper {
+        margin: 0 50px 200px;
+    }
+    .news-group {
+        .news-box {
+            margin-bottom: 30px;
+            .news-parts {
+                display: flex;
+                padding: 20px;
+                opacity: 0;
+                color: rgb(0, 51, 35);
+                border-bottom: 1px solid rgb(0, 51, 35);
+
+                &:first-child {
+                    border-top: 1px solid rgb(0, 51, 35);
+                }
+
+                dt {
+                    margin-right: 50px;
+                }
+            }
+            .news-parts.appear {
+                animation: boxAnime 1s forwards;
+
+                @for $i from 1 through 4 {
+                    &:nth-child(#{$i}) {
+                        animation-delay: $i * 0.1s;
+                    }
+                }
+            }
+
+            @keyframes boxAnime {
+                0% {
+                    transform: translateY(100px);
+                    opacity: 0;
+                }
+                100% {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+
+            .news-parts--hidden {
+                .hide {
+                    display: none;
+
+                    &:first-child {
+                        border-top: none;
+                    }
+                }
+
+                .news-btn {
+                    display: block;
+                    font-size: 23px;
+                    color: antiquewhite;
+                    border-radius: 30px;
+                    border: none;
+                    background-color: rgb(0, 51, 35);
+                    padding: 6px 30px 14px;
+                    margin: 30px auto 0;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: antiquewhite;
+                        border: 2px solid rgb(0, 51, 35);
+                        color: rgb(0, 51, 35);
+                    }
+                }
+            }
+            .news-parts--hidden.open {
+                .hide {
+                    display: flex;
+                }
+
+                .news-btn {
+                    display: none;
+                }
+            }
+        }
+    }
+}

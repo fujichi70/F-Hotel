@@ -1,0 +1,85 @@
+/*   room   */
+// スライド
+#room {
+    background: rgb(0, 51, 35);
+    color: antiquewhite;
+    .wrapper {
+        padding: 100px 0;
+        margin: 0 0 100px;
+    }
+
+    .room-br {
+        display: none;
+    }
+
+    .swiper {
+        width: 90%;
+        height: 100%;
+        text-align: center;
+
+        .swiper-wrapper {
+            margin-bottom: 50px;
+            .swiper-slide {
+                text-align: center;
+
+                img {
+                    width: 90%;
+                    object-fit: cover;
+                }
+                .room-flex {
+                    display: flex;
+                    justify-content: center;
+                    padding: 10px 0;
+                    dt {
+                        display: flex;
+                        text-align: left;
+                        width: 30%;
+                        margin: 0 20px;
+                    }
+                    dd {
+                        display: flex;
+                        width: 60%;
+                    }
+                }
+            }
+        }
+        .swiper-pagination-bullet-active {
+            background: antiquewhite;
+        }
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: rgb(250, 235, 215);
+        }
+
+        .swiper-button-next {
+            right: 0%;
+        }
+        .swiper-button-prev {
+            left: 0%;
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #room {
+        .wrapper {
+            padding: 100px 10px;
+        }
+    }
+}
+@media screen and (max-width: 1300px) {
+    #room {
+        .room-br {
+            display: initial;
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    #room {
+        .room-br {
+            display: none;
+        }
+    }
+}
+
