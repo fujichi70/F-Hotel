@@ -1,7 +1,8 @@
 {
     "/js/app.js": "/js/app.js",
-    "/js/main.js": "/js/main.js",
+    "/js/bootstrap.js": "/js/bootstrap.js",
     "/js/swiper.js": "/js/swiper.js",
+    "/js/main.js": "/js/main.js",
     "/css/app.css": "/css/app.css",
     "/css/style.css": "/css/style.css"
 }

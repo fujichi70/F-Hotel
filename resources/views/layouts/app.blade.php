@@ -15,12 +15,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Zen+Old+Mincho&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link href="{{ asset('css/style.css').'?'.time() }}" rel="stylesheet">
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script type="text/javascript" src="{{ mix('js/swiper.js') }}"></script>
-    <script type="text/javascript" src="{{ mix('js/main.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('js/swiper.js') }}"></script>
+    <script src="{{ mix('js/main.js') }}"></script>
 </head>
 
 <body>

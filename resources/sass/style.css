@@ -1771,4 +1771,141 @@ a {
   display: inline-block;
   vertical-align: middle;
 }
+
+#reservation .search-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#reservation .search-bar .search-calendar .calendar-title--box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#reservation .search-bar .search-calendar .calendar-title--box .calendar-btn {
+  font-size: 10px;
+  cursor: pointer;
+  color: #004b32;
+  border: none;
+  background-color: antiquewhite;
+}
+
+#reservation .search-bar .search-calendar .calendar-title--box .calendar-btn:nth-of-type(1) {
+  margin-right: 10px;
+}
+
+#reservation .search-bar .search-calendar .calendar-title--box .calendar-btn:nth-of-type(2) {
+  margin-left: 10px;
+}
+
+#reservation .search-bar .search-calendar .calendar-title--box .calendar-title {
+  font-size: 18px;
+}
+
+#reservation .reservation-title {
+  font-size: 19px;
+  text-align: center;
+  margin: 50px 0;
+}
+
+#reservation .reservation-form {
+  font-size: 16px;
+  width: 600px;
+  margin: 0 auto;
+}
+
+#reservation .reservation-form dl {
+  padding: 20px;
+  border: 1px solid #003323;
+}
+
+#reservation .reservation-form dl .name {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#reservation .reservation-form dl .name dt {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+#reservation .reservation-form dl .name dd {
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+#reservation .reservation-form dl dt {
+  margin-bottom: 3px;
+}
+
+#reservation .reservation-form dl dd {
+  margin-bottom: 15px;
+  max-width: 500px;
+}
+
+#reservation .reservation-form dl dd .input-area {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #003323;
+  width: 200px;
+}
+
+#reservation .reservation-form dl dd .input-name {
+  width: 100px;
+}
+
+#reservation .reservation-form dl dd .input-address {
+  width: 500px;
+}
+
+#reservation .reservation-form dl dd .radio {
+  display: none;
+}
+
+#reservation .reservation-form dl dd .radio:checked + .radio-text {
+  background: #003323;
+  color: #ffffff;
+}
+
+#reservation .reservation-form dl dd .radio:hover + .radio-text {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+#reservation .reservation-form dl dd .radio-text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 5px;
+  width: 60px;
+  height: 30px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid #003323;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 959px) {
+  #reservation .reservation-form dl dd .radio-text {
+    width: 80px;
+    height: 40px;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid #003323;
+    border-radius: 5px;
+  }
+}
 /*# sourceMappingURL=style.css.map */

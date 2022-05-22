@@ -24,14 +24,14 @@
 					</nav>
 				</div>
 				<div class="top-center">
-					<img src="{{ asset('img/room1.jpg') }}" alt="">
-					<img src="{{ asset('img/room2.jpg') }}" alt="">
-					<img src="{{ asset('img/room3.jpg') }}" alt="">
+					<img src="{{ asset('img/main-grid/standard.jpg') }}" alt="">
+					<img src="{{ asset('img/main-grid/double.jpg') }}" alt="">
+					<img src="{{ asset('img/main-grid/single-delux.jpg') }}" alt="">
 				</div>
 				<div class="top-right">
-					<img src="{{ asset('img/food1.jpg') }}" alt="">
-					<img src="{{ asset('img/food2.jpg') }}" alt="">
-					<img src="{{ asset('img/food3.jpg') }}" alt="">
+					<img src="{{ asset('img/main-grid/food1.jpg') }}" alt="">
+					<img src="{{ asset('img/main-grid/food2.jpg') }}" alt="">
+					<img src="{{ asset('img/main-grid/food3.jpg') }}" alt="">
 				</div>
 				<div class="grid-text">
 					<h1 class="main-title">
@@ -39,9 +39,9 @@
 					</h1>
 				</div>
 				<div class="middle-left">
-					<img src="{{ asset('img/main-grid/food1.png') }}" alt="">
-					<img src="{{ asset('img/main-grid/food2.jpg') }}" alt="">
-					<img src="{{ asset('img/main-grid/food3.jpg') }}" alt="">
+					<img src="{{ asset('img/main-grid/food4.jpg') }}" alt="">
+					<img src="{{ asset('img/main-grid/food5.jpg') }}" alt="">
+					<img src="{{ asset('img/main-grid/food6.jpg') }}" alt="">
 				</div>
 				<div class="middle-center">
 					<img src="{{ asset('img/main-grid/concierge1.jpg') }}" alt="">
@@ -122,129 +122,129 @@
 				<h2 class="contents-title fade">room</h2>
 			</div>
 
-			<div class="swiper">
-				<div class="swiper-wrapper">
-					<div class="swiper-slide fade">
-						<h3>スタンダードルーム</h3>
-						<img src="{{ asset('img/room1.jpg') }}" alt="スタンダードルーム">
-						<dl class="room-flex">
-							<dt>大きさ</dt>
-							<dd>○○㎥</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>定員人数</dt>
-							<dd>2名</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>お食事</dt>
-							<dd>朝食・夕食2食<br class="room-br">（ビュッフェ）</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>1名様の料金<br>（税込）</dt>
-							<dd>¥20,000円<br class="room-br">（2名様での宿泊時）</dd>
-						</dl>
-					</div>
-					<div class="swiper-slide fade">
-						<h3>デラックスルーム</h3>
-						<img src="{{ asset('img/room2.jpg') }}" alt="">
-						<dl class="room-flex">
-							<dt>部屋</dt>
-							<dd>○○㎥</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>定員人数</dt>
-							<dd>2名</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>お食事</dt>
-							<dd>朝食・夕食2食<br class="room-br">（ビュッフェ）</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>1名様の料金<br>（税込）</dt>
-							<dd>¥20,000円<br class="room-br">（2名様での宿泊時）</dd>
-						</dl>
-					</div>
-					<div class="swiper-slide fade">
-						<h3>スイートルーム</h3>
-						<img src="{{ asset('img/room3.jpg') }}" alt="">
-						<dl class="room-flex">
-							<dt>部屋</dt>
-							<dd>○○㎥</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>定員人数</dt>
-							<dd>2名</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>お食事</dt>
-							<dd>朝食・夕食2食<br class="room-br">（ビュッフェ）</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>1名様の料金<br>（税込）</dt>
-							<dd>¥20,000円<br class="room-br">（2名様での宿泊時）</dd>
-						</dl>
-					</div>
-					<div class="swiper-slide fade">
-						<h3>スタンダードルーム</h3>
-						<img src="{{ asset('img/room4.jpg') }}" alt="">
-						<dl class="room-flex">
-							<dt>部屋</dt>
-							<dd>○○㎥</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>定員人数</dt>
-							<dd>2名</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>お食事</dt>
-							<dd>朝食・夕食2食<br>（ビュッフェ）</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>1名様の料金<br>（税込）</dt>
-							<dd>¥20,000円<br>（2名様での宿泊時）</dd>
-						</dl>
-					</div>
-					<div class="swiper-slide fade">
-						<h3>スタンダードルーム</h3>
-						<img src="{{ asset('img/room5.jpg') }}" alt="">
-						<dl class="room-flex">
-							<dt>部屋</dt>
-							<dd>○○㎥</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>定員人数</dt>
-							<dd>2名</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>お食事</dt>
-							<dd>朝食・夕食2食<br>（ビュッフェ）</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>1名様の料金<br>（税込）</dt>
-							<dd>¥20,000円<br>（2名様での宿泊時）</dd>
-						</dl>
-					</div>
-					<div class="swiper-slide fade">
-						<h3>スタンダードルーム</h3>
-						<img src="{{ asset('img/room6.jpg') }}" alt="">
-						<dl class="room-flex">
-							<dt>部屋</dt>
-							<dd>○○㎥</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>定員人数</dt>
-							<dd>2名</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>お食事</dt>
-							<dd>朝食・夕食2食<br>（ビュッフェ）</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>1名様の料金<br>（税込）</dt>
-							<dd>¥20,000円<br>（2名様での宿泊時）</dd>
-						</dl>
-					</div>
+<div class="swiper">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide fade">
+					<h3>スタンダードルーム</h3>
+					<img src="{{ asset('img/room/standard.jpg') }}" alt="スタンダードルーム">
+					<dl class="room-flex">
+						<dt>ベッド</dt>
+						<dd>シングル</dd>
+					</dl>
+					<dl class="room-flex">
+						<dt>定員人数</dt>
+						<dd>1名</dd>
+					</dl>
+					<dl class="room-flex">
+						<dt>お食事</dt>
+						<dd>朝食・夕食2食<br class="room-br">（ビュッフェ）</dd>
+					</dl>
+					<dl class="room-flex">
+						<dt>1名様の料金<br>（税込）</dt>
+						<dd>¥18,000円<br class="room-br">（1名様での宿泊時）</dd>
+					</dl>
 				</div>
+				<div class="swiper-slide fade">
+					<h3>ダブルルーム</h3>
+					<img src="{{ asset('img/room/double.jpg') }}" alt="">
+					<dl class="room-flex">
+						<dt>ベッド</dt>
+						<dd>ダブル</dd>
+					</dl>
+					<dl class="room-flex">
+						<dt>定員人数</dt>
+						<dd>2名</dd>
+					</dl>
+					<dl class="room-flex">
+						<dt>お食事</dt>
+						<dd>朝食・夕食2食<br class="room-br">（ビュッフェ）</dd>
+					</dl>
+					<dl class="room-flex">
+						<dt>1名様の料金<br>（税込）</dt>
+						<dd>¥17,000円<br class="room-br">（2名様での宿泊時）</dd>
+					</dl>
+				</div>
+				<div class="swiper-slide fade">
+					<h3>シングルデラックスルーム</h3>
+					<img src="{{ asset('img/room/single-delux.jpg') }}" alt="">
+					<dl class="room-flex">
+						<dt>ベッド</dt>
+						<dd>シングル</dd>
+					</dl>
+					<dl class="room-flex">
+						<dt>定員人数</dt>
+						<dd>1名</dd>
+					</dl>
+					<dl class="room-flex">
+						<dt>お食事</dt>
+						<dd>朝食・夕食2食<br class="room-br">（ビュッフェ）</dd>
+					</dl>
+					<dl class="room-flex">
+						<dt>1名様の料金<br>（税込）</dt>
+						<dd>¥20,000円<br class="room-br">（1名様での宿泊時）</dd>
+					</dl>
+				</div>
+				<div class="swiper-slide fade">
+					<h3>セミダブルデラックスルーム</h3>
+					<img src="{{ asset('img/room/semidouble-delux.jpg') }}" alt="">
+					<dl class="room-flex">
+						<dt>ベッド</dt>
+						<dd>セミダブル</dd>
+					</dl>
+					<dl class="room-flex">
+						<dt>定員人数</dt>
+						<dd>2名</dd>
+					</dl>
+					<dl class="room-flex">
+						<dt>お食事</dt>
+						<dd>朝食・夕食2食<br>（ビュッフェ）</dd>
+					</dl>
+					<dl class="room-flex">
+						<dt>1名様の料金<br>（税込）</dt>
+						<dd>¥20,000円<br class="room-br">（2名様での宿泊時）</dd>
+					</dl>
+				</div>
+				<div class="swiper-slide fade">
+					<h3>ダブルデラックスルーム</h3>
+					<img src="{{ asset('img/room/double-delux.jpg') }}" alt="">
+					<dl class="room-flex">
+						<dt>ベッド</dt>
+						<dd>ダブル</dd>
+					</dl>
+					<dl class="room-flex">
+						<dt>定員人数</dt>
+						<dd>2名</dd>
+					</dl>
+					<dl class="room-flex">
+						<dt>お食事</dt>
+						<dd>朝食・夕食2食<br>（ビュッフェ）</dd>
+					</dl>
+					<dl class="room-flex">
+						<dt>1名様の料金<br>（税込）</dt>
+						<dd>¥23,000円<br class="room-br">（2名様での宿泊時）</dd>
+					</dl>
+				</div>
+				<div class="swiper-slide fade">
+					<h3>ハイフロアルーム</h3>
+					<img src="{{ asset('img/room/highfloor.jpg') }}" alt="">
+					<dl class="room-flex">
+						<dt>タイプ</dt>
+						<dd>ダブル</dd>
+					</dl>
+					<dl class="room-flex">
+						<dt>定員人数</dt>
+						<dd>2名</dd>
+					</dl>
+					<dl class="room-flex">
+						<dt>お食事</dt>
+						<dd>朝食・夕食2食<br>（ビュッフェ）</dd>
+					</dl>
+					<dl class="room-flex">
+						<dt>1名様の料金<br>（税込）</dt>
+						<dd>¥30,000円<br class="room-br">（2名様での宿泊時）</dd>
+					</dl>
+				</div>
+			</div>
 
 				<div class="swiper-pagination"></div>
 

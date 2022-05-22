@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Calendar\CalendarGet;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class ReserveController extends Controller
 {
-    public function show(Request $request)
+    public function index(Request $request)
     {
 
         //クエリーのdateを受け取る
@@ -29,5 +33,77 @@ class ReserveController extends Controller
         return view('reservation', [
             "calendar" => $calendar
         ]);
+    }
+
+    public function confirm(Request $request)
+    {
+        $request->validate([
+            'reservation_id' => 'required|integer|digits:7',
+            'room_id' => 'required|integer|digits:2',
+            'lastname' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'address' => 'required|string|max:255',
+            'tel' => 'required|string|digits_between:9,11',
+            'people' => 'required|string|between:1,2',
+            'men' => 'required|string|between:0,2',
+            'women' => 'required|string|between:0,2',
+            'arrival' => 'required|date|after:yesterday',
+            'departure' => 'required|date|after:arrival',
+            'checkin_time' => 'required|time',
+        ]);
+
+        $reservation = [
+            'reservation_id' => $request->reservation_id,
+            'room_id' => $request->room_id,
+            'lastname' => $request->lastname,
+            'firstname' => $request->firstname,
+            'email' => $request->email,
+            'address' => $request->address,
+            'tel' => $request->tel,
+            'people' => $request->people,
+            'men' => $request->men,
+            'women' => $request->women,
+            'arrival' => $request->arrival,
+            'departure' => $request->departure,
+            'checkin_time' => $request->checkin_time,
+        ];
+
+        return view('reservation.confirm', [
+            "reservation" => $reservation
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        try {
+            DB::transaction(function () use ($request) {
+                $request->Reservation::create([
+                    'reservation_id' => $request->reservation_id,
+                    'room_id' => $request->room_id,
+                    'lastname' => $request->lastname,
+                    'firstname' => $request->firstname,
+                    'email' => $request->email,
+                    'address' => $request->address,
+                    'tel' => $request->tel,
+                    'people' => $request->people,
+                    'men' => $request->men,
+                    'women' => $request->women,
+                    'arrival' => $request->arrival,
+                    'departure' => $request->departure,
+                    'checkin_time' => $request->checkin_time,
+                ]);
+            });
+        } catch (Throwable $e) {
+            Log::error($e);
+            throw $e;
+        }
+
+        return to_route('reservation.show')->with(['message' => '予約が完了しました。', 'status' => 'info']);
+    }
+
+    public function show(Request $request)
+    {
+
     }
 }

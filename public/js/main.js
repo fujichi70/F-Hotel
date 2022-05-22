@@ -7,57 +7,54 @@ var __webpack_exports__ = {};
 
 
 {
-  $(function () {
+  window.addEventListener('DOMContentLoaded', function () {
     // ハンバーガーメニュー
-    $(".hamburger").on("click", function () {
-      $(this).toggleClass("active");
+    jQuery(".hamburger").on("click", function () {
+      jQuery(this).toggleClass("active");
 
-      if ($(this).hasClass("active")) {
-        $(".sp-menu--nav").addClass("active");
+      if (jQuery(this).hasClass("active")) {
+        jQuery(".sp-menu--nav").addClass("active");
       } else {
-        $(".sp-menu--nav").removeClass("active");
+        jQuery(".sp-menu--nav").removeClass("active");
       }
-    }); // moreボタン
-
-    var hiddenParts = $(".news-parts--hidden");
-    var btn = $(".news-btn");
-    btn.on("click", function () {
-      hiddenParts.addClass("open");
+    });
+    jQuery(".news-btn").on("click", function () {
+      jQuery(".news-parts--hidden").addClass("open");
     }); // ニュースフェードイン
 
-    $(window).on("scroll", function () {
-      $(".news-parts").each(function () {
-        var windowHeight = $(window).height();
-        var scroll = $(window).scrollTop();
-        var targetPosition = $(this).offset().top;
+    jQuery(window).on("scroll", function () {
+      jQuery(".news-parts").each(function () {
+        var windowHeight = jQuery(window).height();
+        var scroll = jQuery(window).scrollTop();
+        var targetPosition = jQuery(this).offset().top;
 
         if (scroll >= targetPosition - windowHeight) {
-          $(this).addClass("appear");
+          jQuery(this).addClass("appear");
         }
       });
     });
-    $(window).on("scroll", function () {
-      $(".fade").each(function () {
-        var windowHeight = $(window).height();
-        var scroll = $(window).scrollTop();
-        var targetPosition = $(this).offset().top;
+    jQuery(window).on("scroll", function () {
+      jQuery(".fade").each(function () {
+        var windowHeight = jQuery(window).height();
+        var scroll = jQuery(window).scrollTop();
+        var targetPosition = jQuery(this).offset().top;
 
         if (scroll >= targetPosition - windowHeight) {
-          $(this).addClass("in");
+          jQuery(this).addClass("in");
         }
       });
     }); // 時間差フェードイン
 
-    $(window).on("scroll", function () {
-      $(".time-fade").each(function (i) {
-        var windowHeight = $(window).height();
-        var scroll = $(window).scrollTop();
-        var targetPosition = $(this).offset().top;
+    jQuery(window).on("scroll", function () {
+      jQuery(".time-fade").each(function (i) {
+        var windowHeight = jQuery(window).height();
+        var scroll = jQuery(window).scrollTop();
+        var targetPosition = jQuery(this).offset().top;
 
         if (scroll >= targetPosition - windowHeight) {
           var delay = 400;
-          $(this).delay(i * delay).queue(function () {
-            $(this).addClass("in");
+          jQuery(this).delay(i * delay).queue(function () {
+            jQuery(this).addClass("in");
           });
         }
       });

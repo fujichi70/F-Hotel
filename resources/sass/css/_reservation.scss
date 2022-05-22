@@ -2,16 +2,16 @@
     .contents {
         .contents-title {
             &::after {
-            overflow: hidden;
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0px;
-            height: 1px;
-            background-color: rgb(0, 75, 50);
-            animation: line_stretch 4s forwards;
+                overflow: hidden;
+                content: "";
+                position: absolute;
+                bottom: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 0px;
+                height: 1px;
+                background-color: rgb(0, 75, 50);
+                animation: line_stretch 4s forwards;
             }
         }
     }
@@ -20,5 +20,143 @@
         margin-left: 20px;
         display: inline-block;
         vertical-align: middle;
+    }
+
+    .search-bar {
+        display: flex;
+        .search-calendar {
+            .calendar-title--box {
+                display: flex;
+                .calendar-btn {
+                    font-size: 10px;
+                    cursor: pointer;
+                    color: rgb(0, 75, 50);
+                    border: none;
+                    background-color: rgb(250, 235, 215);
+                    &:nth-of-type(1) {
+                        margin-right: 10px;
+                    }
+                    &:nth-of-type(2) {
+                        margin-left: 10px;
+                    }
+                }
+
+                .calendar-title {
+                    font-size: 18px;
+                }
+            }
+            thead {
+                tr {
+                    th {
+                    }
+                }
+            }
+        }
+
+        .search-day {
+        }
+    }
+
+    .reservation-title {
+        font-size: 19px;
+        text-align: center;
+        margin: 50px 0;
+    }
+
+    .reservation-form {
+        font-size: 16px;
+        width: 600px;
+        margin: 0 auto;
+        dl {
+            padding: 20px;
+            border: 1px solid rgb(0, 51, 35);
+
+            .name {
+                align-items: center;
+                dt {
+                    margin-right: 10px;
+                    margin-bottom: 10px;
+                }
+                dd{
+                    margin-right: 20px;
+                    margin-bottom: 10px;
+                }
+            }
+
+            dt {
+                margin-bottom: 3px;
+            }
+
+            dd {
+                margin-bottom: 15px;
+                max-width: 500px;
+
+                .input-area {
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                    border: 1px solid rgb(0, 51, 35);
+                    width: 200px;
+                }
+                .input-name {
+                    width: 100px;
+                }
+
+                .input-address {
+                    width: 500px;
+                }
+
+                .radio {
+                    display: none;
+
+                    &:checked + .radio-text {
+                        background: rgb(0, 51, 35);
+                        color: #ffffff;
+                    }
+                    &:hover + .radio-text {
+                        transform: scale(1.1);
+                    }
+                }
+
+                .radio-text {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 5px;
+                    width: 60px;
+                    height: 30px;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    text-align: center;
+                    cursor: pointer;
+                    border: 2px solid rgb(0, 51, 35);
+                    border-radius: 5px;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 959px) {
+        .reservation-form {
+            dl {
+                dt {
+                }
+
+                dd {
+                    .radio {
+                    }
+
+                    .radio-text {
+                        width: 80px;
+                        height: 40px;
+                        padding-left: 5px;
+                        padding-right: 5px;
+                        text-align: center;
+                        cursor: pointer;
+                        border: 2px solid rgb(0, 51, 35);
+                        border-radius: 5px;
+                    }
+                }
+            }
+        }
     }
 }

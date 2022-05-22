@@ -23,7 +23,10 @@ Route::get('/', function() {
     return view('index');
 });
 
-Route::get('/reservation', [ReserveController::class, 'show'])->name('reservation');
+Route::group(['prefix' => 'reservation'], function() {
+    Route::get('/', [ReserveController::class, 'index'])->name('reservation');
+    Route::get('confirm', [ReserveController::class, 'confirm'])->name('reservation.confirm');
+});
 
 
 Route::get('/dashboard', function () {
@@ -33,11 +36,5 @@ Route::get('/dashboard', function () {
 Route::get('/user', function () {
     return view('user');
 });
-
-Route::get('/calendar', [CalendarController::class, 'show'])->name('calendar');
-
-// Route::get('/calendar', function() {
-//     return view('calendar');
-// });
 
 require __DIR__.'/auth.php';

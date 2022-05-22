@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('room_id');
             $table->string('room_name');
             $table->string('img_path');
+            $table->decimal('price', 5, 0);
             $table->timestamps();
         });
     }

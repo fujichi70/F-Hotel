@@ -19,6 +19,30 @@ class CalendarGet
 		return $this->now->format('Y年m月');
 	}
 
+	public function getYear()
+	{
+		return $this->now->format('Y');
+	}
+
+	public function getMonth()
+	{
+		return $this->now->format('m');
+	}
+	public function getDay()
+	{
+		return $this->now->format('d');
+	}
+
+	public function getToday()
+	{
+		if (isset($_GET['date'])) {
+			$date = $_GET['date'];
+			return $date; 
+		} else {
+		return $this->now->format('Y-m-d');
+		}
+	}
+
 	/**
 	 * 月曜日〜日曜日までループ（１週間になる）
 	 * @param object $startDay 週の初めの日（月）
@@ -125,7 +149,7 @@ class CalendarGet
 			$html[] = '<tr class="week">';
 			foreach ($week as $day) {
 				$html[] = '<td class="day">';
-				$html[] = '<a class="day-item" href="/calendar?date='. $this->getSelectDay($day). '">';
+				$html[] = '<a class="day-item" href="/reservation?date='. $this->getSelectDay($day). '">';
 				$html[] = $day;
 				$html[] = '</a>';
 				$html[] = '</td>';
