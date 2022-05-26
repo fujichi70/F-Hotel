@@ -66,8 +66,8 @@ a {
 }
 
 .contents .contents-title.fade.in::after {
-  overflow: hidden;
   content: "";
+  overflow: hidden;
   position: absolute;
   bottom: -10px;
   left: 50%;
@@ -101,6 +101,14 @@ a {
 .text {
   font-size: 18px;
   margin: 0 0 40px 20px;
+}
+
+.btn {
+  background-color: #004b32;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
 }
 
 .fade {
@@ -1595,6 +1603,8 @@ a {
 }
 
 #footer {
+  width: 100%;
+  bottom: 0;
   background: #003323;
   color: antiquewhite;
 }
@@ -1609,7 +1619,7 @@ a {
   font-size: 20px;
 }
 
-.btn {
+.user-btn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1626,14 +1636,14 @@ a {
   border-radius: 5px;
   width: 200px;
   height: 40px;
-  border: 1px solid #004b32;
+  border: 2px solid #004b32;
   position: relative;
   -webkit-transition: 0.3s;
   transition: 0.3s;
-  background-color: #ffffff00;
+  background-color: #fff;
 }
 
-.btn::before, .btn::after {
+.user-btn::before, .user-btn::after {
   content: "";
   display: block;
   position: absolute;
@@ -1648,27 +1658,27 @@ a {
   will-change: transform;
 }
 
-.btn:hover {
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
-}
-
-.btn::before {
+.user-btn::before {
   -webkit-transform: translateY(-50%) rotate(30deg);
           transform: translateY(-50%) rotate(30deg);
 }
 
-.btn::after {
+.user-btn::after {
   -webkit-transform: translateY(-50%) rotate(-30deg);
           transform: translateY(-50%) rotate(-30deg);
 }
 
-.btn:hover::before {
+.user-btn:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.user-btn:hover::before {
   -webkit-animation: arrowAnime01 1s both infinite;
           animation: arrowAnime01 1s both infinite;
 }
 
-.btn:hover::after {
+.user-btn:hover::after {
   -webkit-animation: arrowAnime02 1s both infinite;
           animation: arrowAnime02 1s both infinite;
 }
@@ -1717,8 +1727,8 @@ a {
   }
 }
 
-#user-auth .wrapper {
-  margin: 50px 30px;
+#user-auth {
+  margin-bottom: 50px;
 }
 
 #user-auth .auth {
@@ -1729,7 +1739,7 @@ a {
   padding: 0 30px;
   border-radius: 5px;
   max-width: 1000px;
-  height: 500px;
+  height: 300px;
 }
 
 #user-auth .auth .login {
@@ -1750,7 +1760,7 @@ a {
   margin: 20px;
 }
 
-#reservation .contents .contents-title::after {
+.contents .contents-title::after {
   overflow: hidden;
   content: "";
   position: absolute;
@@ -1765,7 +1775,7 @@ a {
           animation: line_stretch 4s forwards;
 }
 
-#reservation .sub-title {
+.contents .contents-title .sub-title {
   font-size: 18px;
   margin-left: 20px;
   display: inline-block;
@@ -1812,13 +1822,10 @@ a {
 
 #reservation .reservation-form {
   font-size: 16px;
-  width: 600px;
-  margin: 0 auto;
-}
-
-#reservation .reservation-form dl {
-  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto 20px;
   border: 1px solid #003323;
+  padding: 20px;
 }
 
 #reservation .reservation-form dl .name {
@@ -1857,8 +1864,12 @@ a {
   width: 100px;
 }
 
+#reservation .reservation-form dl dd .input-tel {
+  width: 400px;
+}
+
 #reservation .reservation-form dl dd .input-address {
-  width: 500px;
+  width: 400px;
 }
 
 #reservation .reservation-form dl dd .radio {
@@ -1896,6 +1907,18 @@ a {
   border-radius: 5px;
 }
 
+#reservation .reservation-form .btn {
+  margin: 0 auto;
+}
+
+#reservation .reservation-form .error {
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 13px;
+  color: #d60000;
+  padding-bottom: 10px;
+}
+
 @media screen and (max-width: 959px) {
   #reservation .reservation-form dl dd .radio-text {
     width: 80px;
@@ -1907,5 +1930,271 @@ a {
     border: 2px solid #003323;
     border-radius: 5px;
   }
+  #reservation .reservation-form dl dd select {
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  #reservation .reservation-form dl dd .input-arrival {
+    display: block;
+  }
+  #reservation .reservation-form dl dd .input-arrival .input-area {
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  #reservation .reservation-form dl dd .input-address {
+    width: 310px;
+  }
+}
+
+.reservation-room {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.reservation-room--title {
+  text-align: center;
+  font-size: 20px;
+}
+
+.reservation-room--box {
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 50px;
+  background-color: #fff;
+}
+
+.reservation-room--item {
+  padding-bottom: 30px;
+  border-bottom: 1px solid #c5c5c5;
+}
+
+.reservation-room--item .reservation-room--name {
+  font-size: 20px;
+  margin-bottom: 5px;
+  position: relative;
+  padding-top: 50px;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.reservation-room--item .reservation-room--name::before {
+  content: attr(data-en);
+  position: absolute;
+  -webkit-transform: rotate(-10deg);
+          transform: rotate(-10deg);
+  top: 30px;
+  left: 0;
+  color: #2975462c;
+  font-size: 50px;
+  font-weight: 400;
+  font-family: "Monotype Corsiva";
+  font-style: italic;
+}
+
+.reservation-room--item .room-flex {
+  margin-top: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.reservation-room--item .room-flex dt {
+  padding: 10px 0;
+  text-align: center;
+  min-width: 160px;
+  margin-right: 20px;
+  background: #2975462c;
+}
+
+.reservation-room--item .room-flex dd {
+  padding: 10px 0;
+  display: inline-block;
+}
+
+.reservation-room--item .room-flex .room-br {
+  display: none;
+}
+
+.reservation-room--item .btn {
+  margin: 30px 0;
+}
+
+@media screen and (max-width: 600px) {
+  .reservation-room--item .reservation-room--name {
+    font-size: 20px;
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .reservation-room--item .reservation-room--name::before {
+    top: 30px;
+    left: 0;
+    color: #2975462c;
+    font-size: 50px;
+    font-weight: 400;
+    font-family: "Monotype Corsiva";
+    font-style: italic;
+  }
+}
+
+#room-detail {
+  background-color: #fff;
+  text-align: center;
+}
+
+#room-detail .reservation-room--item {
+  border-bottom: none;
+  padding: 50px 0;
+}
+
+#room-detail .reservation-room--name {
+  max-width: 600px;
+  margin: 0 auto 20px;
+}
+
+#room-detail .room-detail--table {
+  margin: 10px auto;
+  max-width: 600px;
+  text-align: left;
+}
+
+#room-detail .room-detail--table tbody {
+  width: 100%;
+}
+
+#room-detail .room-detail--table tbody tr th {
+  padding: 7px 0 7px 5px;
+  width: 20%;
+  background: #2975462c;
+  border-bottom: 1px solid #707070;
+}
+
+#room-detail .room-detail--table tbody tr td {
+  padding: 7px 0 7px 5px;
+  width: 60%;
+  border-bottom: 1px solid #707070;
+}
+
+#reservation-confirm .wrapper {
+  margin: 0 20px;
+}
+
+#reservation-confirm .confirm-form .confirm-item {
+  background-color: #fff;
+  -webkit-box-shadow: 3px 3px 1px gray;
+          box-shadow: 3px 3px 1px gray;
+  border-radius: 10px;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 50px 30px;
+}
+
+#reservation-confirm .confirm-form .confirm-item .confirm-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+#reservation-confirm .confirm-form .confirm-item .confirm-flex p:first-child {
+  min-width: 150px;
+}
+
+#reservation-confirm .confirm-form .confirm-item .confirm-flex span {
+  margin-left: 10px;
+}
+
+#reservation-confirm .confirm-form .confirm-item .btn-box {
+  margin-top: 20px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#reservation-confirm .confirm-form .confirm-item .btn-box .btn {
+  margin: 0 auto;
+}
+
+#reservation-confirm .confirm-form .confirm-item .btn-box .btn-back {
+  background: #707070;
+}
+
+#reservation-complete .wrapper {
+  margin: 0 20px;
+}
+
+#reservation-complete .complete-title {
+  font-size: 30px;
+  text-align: center;
+  -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+          animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+  margin-bottom: 20px;
+}
+
+@-webkit-keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#reservation-complete .complete-box {
+  background-color: #fff;
+  -webkit-box-shadow: 3px 3px 1px gray;
+          box-shadow: 3px 3px 1px gray;
+  border-radius: 10px;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 50px;
+  text-align: center;
+}
+
+#reservation-complete .complete-box .complete-text {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+#reservation-complete .complete-box .message {
+  margin-bottom: 10px;
+}
+
+#reservation-complete .complete-box .complete-reservation-id {
+  margin-bottom: 20px;
+}
+
+#reservation-complete .complete-box .complete-message {
+  font-size: 16px;
+}
+
+#reservation-complete .complete-box .btn {
+  margin: 50px;
 }
 /*# sourceMappingURL=style.css.map */

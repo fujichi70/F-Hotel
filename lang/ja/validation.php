@@ -118,7 +118,17 @@ return [
     ],
     'attributes'           => [
         'name' => '名前',
+        'lastname' => '姓',
+        'firstname' => '名',
         'email' => 'メールアドレス',
-        'password' => 'パスワード'
+        'password' => 'パスワード',
+        'address' => '住所',
+        'tel' => '電話番号',
+        'people' => '宿泊人数',
+        'men' => '男性人数',
+        'women' => '女性人数',
+        'arrival' => '宿泊日',
+        'departure' => '宿泊日',
+        'checkin_time' => 'チェックイン時間',
     ],
 ];

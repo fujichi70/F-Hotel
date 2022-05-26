@@ -27,7 +27,7 @@
     <!-- Page Heading -->
     <header id="header">
         <div class="wrapper">
-            <img class="logo" src="{{ asset('img/logo.png') }}" alt="">
+            <a href="{{ route('top') }}"><img class="logo" src="{{ asset('img/logo.png') }}" alt="logo"></a>
         </div>
 
         <div class="sp-menu">

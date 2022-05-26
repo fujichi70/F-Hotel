@@ -1,27 +1,27 @@
-#reservation {
-    .contents {
-        .contents-title {
-            &::after {
-                overflow: hidden;
-                content: "";
-                position: absolute;
-                bottom: -10px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 0px;
-                height: 1px;
-                background-color: rgb(0, 75, 50);
-                animation: line_stretch 4s forwards;
-            }
+.contents {
+    .contents-title {
+        &::after {
+            overflow: hidden;
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0px;
+            height: 1px;
+            background-color: rgb(0, 75, 50);
+            animation: line_stretch 4s forwards;
+        }
+        .sub-title {
+            font-size: 18px;
+            margin-left: 20px;
+            display: inline-block;
+            vertical-align: middle;
         }
     }
-    .sub-title {
-        font-size: 18px;
-        margin-left: 20px;
-        display: inline-block;
-        vertical-align: middle;
-    }
+}
 
+#reservation {
     .search-bar {
         display: flex;
         .search-calendar {
@@ -65,19 +65,18 @@
 
     .reservation-form {
         font-size: 16px;
-        width: 600px;
-        margin: 0 auto;
+        max-width: 600px;
+        margin: 0 auto 20px;
+        border: 1px solid rgb(0, 51, 35);
+        padding: 20px;
         dl {
-            padding: 20px;
-            border: 1px solid rgb(0, 51, 35);
-
             .name {
                 align-items: center;
                 dt {
                     margin-right: 10px;
                     margin-bottom: 10px;
                 }
-                dd{
+                dd {
                     margin-right: 20px;
                     margin-bottom: 10px;
                 }
@@ -101,8 +100,12 @@
                     width: 100px;
                 }
 
+                .input-tel {
+                    width: 400px;
+                }
+
                 .input-address {
-                    width: 500px;
+                    width: 400px;
                 }
 
                 .radio {
@@ -133,6 +136,16 @@
                 }
             }
         }
+        .btn {
+            margin: 0 auto;
+        }
+        .error {
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 13px;
+            color: rgb(214, 0, 0);
+            padding-bottom: 10px;
+        }
     }
 
     @media screen and (max-width: 959px) {
@@ -155,8 +168,259 @@
                         border: 2px solid rgb(0, 51, 35);
                         border-radius: 5px;
                     }
+
+                    select {
+                        padding: 5px 10px;
+                        border-radius: 5px;
+                    }
+
+                    .input-arrival {
+                        display: block;
+                        .input-area {
+                            display: block;
+                            margin-bottom: 20px;
+                        }
+                    }
                 }
             }
+        }
+    }
+
+    @media screen and (max-width: 450px) {
+        .reservation-form {
+            dl {
+                dd {
+                    .input-address {
+                        width: 310px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 部屋部分（詳細ページでも引用）
+.reservation-room {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.reservation-room--title {
+    text-align: center;
+    font-size: 20px;
+}
+
+.reservation-room--box {
+    margin: 0 auto;
+    max-width: 600px;
+    padding: 50px;
+    background-color: #fff;
+}
+.reservation-room--item {
+    padding-bottom: 30px;
+    border-bottom: 1px solid #c5c5c5;
+    .reservation-room--name {
+        font-size: 20px;
+        margin-bottom: 5px;
+        position: relative;
+        padding-top: 50px;
+        padding-left: 20px;
+        margin-bottom: 20px;
+
+        &::before {
+            content: attr(data-en);
+            position: absolute;
+            transform: rotate(-10deg);
+            top: 30px;
+            left: 0;
+            color: #2975462c;
+            font-size: 50px;
+            font-weight: 400;
+            font-family: "Monotype Corsiva";
+            font-style: italic;
+        }
+    }
+
+    .room-flex {
+        margin-top: 5px;
+        display: flex;
+        align-items: center;
+        dt {
+            padding: 10px 0;
+            text-align: center;
+            min-width: 160px;
+            margin-right: 20px;
+            background: #2975462c;
+        }
+
+        dd {
+            padding: 10px 0;
+            display: inline-block;
+        }
+
+        .room-br {
+            display: none;
+        }
+    }
+
+    .btn {
+        margin: 30px 0;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .reservation-room--item {
+        .reservation-room--name {
+            font-size: 20px;
+            position: relative;
+            margin-bottom: 20px;
+
+            &::before {
+                top: 30px;
+                left: 0;
+                color: #2975462c;
+                font-size: 50px;
+                font-weight: 400;
+                font-family: "Monotype Corsiva";
+                font-style: italic;
+            }
+        }
+    }
+}
+
+#room-detail {
+    background-color: #fff;
+    text-align: center;
+
+    .reservation-room--item {
+        border-bottom: none;
+        padding: 50px 0;
+    }
+
+    .reservation-room--name {
+        max-width: 600px;
+        margin: 0 auto 20px;
+    }
+
+    .room-detail--table {
+        margin: 10px auto;
+        max-width: 600px;
+        text-align: left;
+        tbody {
+            width: 100%;
+            tr {
+                th {
+                    padding: 7px 0 7px 5px;
+                    width: 20%;
+                    background: #2975462c;
+                    border-bottom: 1px solid #707070;
+                }
+                td {
+                    padding: 7px 0 7px 5px;
+                    width: 60%;
+                    border-bottom: 1px solid #707070;
+                }
+            }
+        }
+    }
+}
+
+#reservation-confirm {
+    .wrapper {
+        margin: 0 20px;
+    }
+
+    .confirm-form {
+        .confirm-item {
+            background-color: #fff;
+            box-shadow: 3px 3px 1px gray;
+            border-radius: 10px;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 50px 30px;
+
+            .confirm-flex {
+                display: flex;
+                margin-bottom: 10px;
+
+                p {
+                    &:first-child {
+                        min-width: 150px;
+                    }
+                }
+                span {
+                    margin-left: 10px;
+                }
+            }
+            .btn-box {
+                margin-top: 20px;
+                justify-content: center;
+                align-items: center;
+                .btn {
+                    margin: 0 auto;
+                }
+                .btn-back {
+                    background: #707070;
+                }
+            }
+        }
+    }
+}
+
+#reservation-complete {
+    .wrapper {
+        margin: 0 20px;
+    }
+
+    .complete-title {
+        font-size: 30px;
+        text-align: center;
+        animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1)
+            both;
+        margin-bottom: 20px;
+
+        @keyframes tracking-in-expand {
+            0% {
+                letter-spacing: -0.5em;
+                opacity: 0;
+            }
+            40% {
+                opacity: 0.6;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    }
+
+    .complete-box {
+        background-color: #fff;
+        box-shadow: 3px 3px 1px gray;
+        border-radius: 10px;
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 50px;
+        text-align: center;
+
+        .complete-text {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+
+        .complete-reservation-id {
+            margin-bottom: 20px;
+        }
+
+        .complete-message {
+            font-size: 16px;
+        }
+
+        .btn {
+            margin: 50px;
         }
     }
 }

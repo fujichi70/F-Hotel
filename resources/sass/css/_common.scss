@@ -62,8 +62,8 @@ a {
     }
     .contents-title.fade.in {
         &::after {
-            overflow: hidden;
             content: "";
+            overflow: hidden;
             position: absolute;
             bottom: -10px;
             left: 50%;
@@ -76,6 +76,7 @@ a {
     }
 
 }
+
 @keyframes line_stretch {
     0% {
         width: 0px;
@@ -89,6 +90,15 @@ a {
 .text {
     font-size: 18px;
     margin: 0 0 40px 20px;
+}
+
+// 共通ボタン
+.btn {
+    background-color: rgb(0, 75, 50);
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;
 }
 
 // 共通フェードイン

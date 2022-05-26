@@ -1,3 +1,8 @@
+<?php
+
+
+?>
+
 @extends('layouts.app')
 
 @section('content')
@@ -13,12 +18,12 @@
 				<div class="calendar-header text-center">
 					<a class="btn" href="{{ url('/reservation?date=' . $calendar->getPreviousMonth()) }}">前の月</a>
 					<span>{{ $calendar->getTitle() }}</span>
-					<a class="btn" href="{{ url('/reservation?date=' . $calendar->getNextMonth()) }}">前の月</a>
+					<a class="btn" href="{{ url('/reservation?date=' . $calendar->getNextMonth()) }}">次の月</a>
 				</div>
 				<form action="" method="post">
 					@csrf
 					<div class="calendar-body">
-						{!! $calendar->render() !!}
+						<input type="button" name="day">{!! $calendar->render() !!}
 					</div>
 				</form>
 			</div>
@@ -37,46 +42,229 @@
 			</div>
 		</div>
 
+		<div class="reservation-room">
+			<h3 class="reservation-room--title">お部屋を選択</h3>
+			<div class="reservation-room--box">
+				<div class="reservation-room--item">
+					<a href="{{ route('standard') }}">
+						<h4 class="reservation-room--name" data-en="Standard">スタンダードルーム</h4>
+						<img src="{{ asset('img/room/standard.jpg') }}" alt="スタンダードルーム">
+						<dl class="room-flex">
+							<dt>ベッド</dt>
+							<dd>シングル</dd>
+						</dl>
+						<dl class="room-flex">
+							<dt>定員人数</dt>
+							<dd>1名</dd>
+						</dl>
+						<dl class="room-flex">
+							<dt>お食事</dt>
+							<dd>朝食・夕食2食<br class="room-br">（ビュッフェ）</dd>
+						</dl>
+						<dl class="room-flex">
+							<dt>1名様の料金<br class="room-br">(税込)</dt>
+							<dd>¥18,000円<br class="room-br">（1名様での宿泊時）</dd>
+						</dl>
+					</a>
+					<button onclick="location.href='{{ route('standard') }}'" class="btn">この部屋を選択</button>
+				</div>
+				<div class="reservation-room--item">
+					<a href="{{ route('double') }}">
+						<img src="{{ asset('img/room/double.jpg') }}" alt="ダブルルーム">
+						<dl class="room-flex">
+							<dt>ベッド</dt>
+							<dd>ダブル</dd>
+						</dl>
+						<dl class="room-flex">
+							<dt>定員人数</dt>
+							<dd>2名</dd>
+						</dl>
+						<dl class="room-flex">
+							<dt>お食事</dt>
+							<dd>朝食・夕食2食<br class="room-br">（ビュッフェ）</dd>
+						</dl>
+						<dl class="room-flex">
+							<dt>1名様の料金<br class="room-br">(税込)</dt>
+							<dd>¥17,000円<br class="room-br">（2名様での宿泊時）</dd>
+						</dl>
+					</a>
+					<button onclick="location.href='{{ route('double') }}'" class="btn">この部屋を選択</button>
+				</div>
+				<div class="reservation-room--item">
+					<a href="{{ route('singledelux') }}">
+						<h4 class="reservation-room--name" data-en="SingleDelux">シングルデラックスルーム</h4>
+						<img src="{{ asset('img/room/single-delux.jpg') }}" alt="">
+						<dl class="room-flex">
+							<dt>ベッド</dt>
+							<dd>シングル</dd>
+						</dl>
+						<dl class="room-flex">
+							<dt>定員人数</dt>
+							<dd>1名</dd>
+						</dl>
+						<dl class="room-flex">
+							<dt>お食事</dt>
+							<dd>朝食・夕食2食<br class="room-br">（ビュッフェ）</dd>
+						</dl>
+						<dl class="room-flex">
+							<dt>1名様の料金<br class="room-br">(税込)</dt>
+							<dd>¥20,000円<br class="room-br">（1名様での宿泊時）</dd>
+						</dl>
+					</a>
+					<button onclick="location.href='{{ route('singledelux') }}'" class="btn">この部屋を選択</button>
+				</div>
+				<div class="reservation-room--item">
+					<a href="{{ route('semidoubledelux') }}">
+						<h4 class="reservation-room--name" data-en="semiDoubleDelux">セミダブルデラックスルーム</h4>
+						<img src="{{ asset('img/room/semidouble-delux.jpg') }}" alt="">
+						<dl class="room-flex">
+							<dt>ベッド</dt>
+							<dd>セミダブル</dd>
+						</dl>
+						<dl class="room-flex">
+							<dt>定員人数</dt>
+							<dd>2名</dd>
+						</dl>
+						<dl class="room-flex">
+							<dt>お食事</dt>
+							<dd>朝食・夕食2食<br class="room-br">（ビュッフェ）</dd>
+						</dl>
+						<dl class="room-flex">
+							<dt>1名様の料金<br class="room-br">(税込)</dt>
+							<dd>¥20,000円<br class="room-br">（2名様での宿泊時）</dd>
+						</dl>
+					</a>
+					<button onclick="location.href='{{ route('semidoubledelux') }}'" class="btn">この部屋を選択</button>
+				</div>
+				<div class="reservation-room--item">
+					<a href="{{ route('doubledelux') }}">
+						<h4 class="reservation-room--name" data-en="DoubleDelux">ダブルデラックスルーム</h4>
+						<img src="{{ asset('img/room/double-delux.jpg') }}" alt="">
+						<dl class="room-flex">
+							<dt>ベッド</dt>
+							<dd>ダブル</dd>
+						</dl>
+						<dl class="room-flex">
+							<dt>定員人数</dt>
+							<dd>2名</dd>
+						</dl>
+						<dl class="room-flex">
+							<dt>お食事</dt>
+							<dd>朝食・夕食2食<br class="room-br">（ビュッフェ）</dd>
+						</dl>
+						<dl class="room-flex">
+							<dt>1名様の料金<br class="room-br">(税込)</dt>
+							<dd>¥23,000円<br class="room-br">（2名様での宿泊時）</dd>
+						</dl>
+					</a>
+					<button onclick="location.href='{{ route('doubledelux') }}'" class="btn">この部屋を選択</button>
+				</div>
+				<div class="reservation-room--item">
+					<a href="{{ route('highfloor') }}">
+						<h4 class="reservation-room--name" data-en="HighFloor">ハイフロアルーム</h4>
+						<img src="{{ asset('img/room/highfloor.jpg') }}" alt="">
+						<dl class="room-flex">
+							<dt>タイプ</dt>
+							<dd>ダブル</dd>
+						</dl>
+						<dl class="room-flex">
+							<dt>定員人数</dt>
+							<dd>2名</dd>
+						</dl>
+						<dl class="room-flex">
+							<dt>お食事</dt>
+							<dd>朝食・夕食2食<br class="room-br">（ビュッフェ）</dd>
+						</dl>
+						<dl class="room-flex">
+							<dt>1名様の料金<br class="room-br">(税込)</dt>
+							<dd>¥30,000円<br class="room-br">（2名様での宿泊時）</dd>
+						</dl>
+					</a>
+					<button onclick="location.href='{{ route('highfloor') }}'" class="btn">この部屋を選択</button>
+				</div>
+			</div><!-- .reservation-room--box -->
+		</div><!-- #room-reservation -->
+
 		<h3 class="reservation-title">ご予約はこちら</h3>
 		<form action="{{ route('reservation.confirm') }}" method="post" class="reservation-form">
 			@csrf
 			<dl>
 				<div class="name flex">
 					<dt><label for="lastname" class="info">姓</label></dt>
-					<dd><input class="input-area input-name" type="text" name="lastname" id="lastname" placeholder="山田"></dd>
+					<dd><input class="input-area input-name" type="text" name="lastname" id="lastname" placeholder="山田"
+							value="{{ old('lastname') }}">
+					</dd>
 					<dt><label for="firstname" class="info">名</label></dt>
-					<dd><input class="input-area input-name" type="text" name="firstname" id="firstname" placeholder="太郎"></dd>
+					<dd><input class="input-area input-name" type="text" name="firstname" id="firstname"
+							placeholder="太郎" value="{{ old('firstname') }}"></dd>
 				</div>
+				@error('lastname')
+				<p class="error">&#33; {{$message}}</p>
+				@enderror
+				@error('firstname')
+				<p class="error">&#33; {{$message}}</p>
+				@enderror
 				<dt><label for="email" class="info">メールアドレス</label></dt>
-				<dd><input class="input-area" type="email" name="email" id="email" placeholder="aaa@test.com"></dd>
+				<dd><input class="input-area" type="email" name="email" id="email" placeholder="aaa@test.com"
+						value="{{ old('email') }}"></dd>
+				@error('email')
+				<p class="error">&#33; {{$message}}</p>
+				@enderror
 				<dt><label for="address" class="info">住所</label></dt>
 				<dd><input class="input-area input-address" type="text" name="address" id="address"
-						placeholder="北海道札幌市中央区南◯条西◯丁目××-×-××"></dd>
+						placeholder="北海道札幌市中央区南◯条西◯丁目××-×-××" value="{{ old('address') }}"></dd>
+				@error('address')
+				<p class="error">&#33; {{$message}}</p>
+				@enderror
 				<dt><label for="tel" class="info">電話番号</label></dt>
-				<dd><input class="input-area" type="tel" name="tel" id="tel" placeholder="011-××××-××××"></dd>
+				<dd><input class="input-area input-tel" type="tel" name="tel" id="tel" placeholder="011××××××××（ハイフンなし）"
+						value="{{ old('tel') }}"></dd>
+				@error('tel')
+				<p class="error">&#33; {{$message}}</p>
+				@enderror
 				<dt><label class="info">ご宿泊人数</label></dt>
 				<dd class="flex">
-						<input type="radio" class="radio" name="people" id="people1" value="1"><label for="people1" class="radio-text">1名</label>
-						<input type="radio" class="radio" name="people" id="people2" value="2" checked><label for="people2" class="radio-text">2名</label>
+					<input type="radio" class="radio" name="people" id="people1" value="1"><label for="people1"
+						class="radio-text">1名</label>
+					<input type="radio" class="radio" name="people" id="people2" value="2" checked><label for="people2"
+						class="radio-text">2名</label>
 				</dd>
+				@error('people')
+				<p class="error">&#33; {{$message}}</p>
+				@enderror
 				<dt><label class="info">男性</label></dt>
 				<dd class="flex">
-						<input type="radio" class="radio" name="men" id="men0" value="0" checked><label for="men0" class="radio-text">0名</label>
-						<input type="radio" class="radio" name="men" id="men1" value="1"><label for="men1" class="radio-text">1名</label>
-						<input type="radio" class="radio" name="men" id="men2" value="2"><label for="men2" class="radio-text">2名</label>
+					<input type="radio" class="radio" name="men" id="men0" value="0" checked><label for="men0"
+						class="radio-text">0名</label>
+					<input type="radio" class="radio" name="men" id="men1" value="1"><label for="men1"
+						class="radio-text">1名</label>
+					<input type="radio" class="radio" name="men" id="men2" value="2"><label for="men2"
+						class="radio-text">2名</label>
 				</dd>
+				@error('men')
+				<p class="error">&#33; {{$message}}</p>
+				@enderror
 				<dt><label class="info">女性</label></dt>
 				<dd class="flex">
-						<input type="radio" class="radio" name="women" id="women0" value="0" checked><label for="women0" class="radio-text">0名</label>
-						<input type="radio" class="radio" name="women" id="women1" value="1"><label for="women1" class="radio-text">1名</label>
-						<input type="radio" class="radio" name="women" id="women2" value="2"><label for="women2" class="radio-text">2名</label>
+					<input type="radio" class="radio" name="women" id="women0" value="0" checked><label for="women0"
+						class="radio-text">0名</label>
+					<input type="radio" class="radio" name="women" id="women1" value="1"><label for="women1"
+						class="radio-text">1名</label>
+					<input type="radio" class="radio" name="women" id="women2" value="2"><label for="women2"
+						class="radio-text">2名</label>
 				</dd>
-				<dt><label for="arrival" class="info">ご宿泊日</label></dt>
-				<dd>
-					<input class="input-area" type="date" name="arrival" value="{{ $calendar->getToday() }}"> ~ 
-					<input class="input-area" type="date" name="arrival">
+				@error('women')
+				<p class="error">&#33; {{$message}}</p>
+				@enderror
+				<dt><label class="info">ご宿泊日</label></dt>
+				<dd class="input-arrival">
+					<input class="input-area" type="date" name="arrival" value="{{ $calendar->getToday() }}"> ~
+					<input class="input-area" type="date" name="departure" value="{{ old('departure') }}">
 				</dd>
 				{{-- <dd>◯日間</dd> --}}
+				@error('departure')
+				<p class="error">&#33; {{$message}}</p>
+				@enderror
 				<dt><label for="checkin_time" class="info">チェックイン</label></dt>
 				<dd>
 					<select id="checkin_time" name="checkin_time">
@@ -96,8 +284,11 @@
 						<option value="20:00">20:00～</option>
 					</select>
 				</dd>
+				@error('checkin_time')
+				<p class="error">&#33; {{$message}}</p>
+				@enderror
 			</dl>
-			<input class="btn btn-info" type="submit" name="btn-confirm" value="確認画面へ">
+			<input class="btn" type="submit" name="btn-confirm" value="確認画面へ">
 		</form>
 	</div>
 </section>

@@ -4,7 +4,7 @@
     font-size: 20px;
 }
 
-.btn {
+.user-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -15,10 +15,10 @@
     border-radius: 5px;
     width: 200px;
     height: 40px;
-    border: 1px solid rgb(0, 75, 50);
+    border: 2px solid rgb(0, 75, 50);
     position: relative;
     transition: 0.3s;
-    background-color: #ffffff00;
+    background-color: #fff;
     &::before,
     &::after {
         content: "";
@@ -33,10 +33,6 @@
         border-radius: 2px;
         will-change: transform;
     }
-	&:hover {
-		transform: scale(1.1);
-	}
-
     &::before {
         transform: translateY(-50%) rotate(30deg);
     }
@@ -45,15 +41,18 @@
         transform: translateY(-50%) rotate(-30deg);
     }
 
-    &:hover::before {
-        // transform: translate(5px, -50%) rotate(30deg);
-		animation: arrowAnime01 1s both infinite;
+    &:hover {
+        transform: scale(1.1);
+        &::before {
+            animation: arrowAnime01 1s both infinite;
+        }
+
+        &::after {
+            animation: arrowAnime02 1s both infinite;
+        }
+
     }
 	
-    &:hover::after {
-		// transform: translate(5px, -50%) rotate(-30deg);
-		animation: arrowAnime02 1s both infinite;
-    }
 
     @keyframes arrowAnime01 {
         0%,100% {
@@ -77,10 +76,7 @@
 }
 
 #user-auth {
-    .wrapper {
-        margin: 50px 30px;
-    }
-
+    margin-bottom: 50px;
     .auth {
         background-color: #fff;
         box-shadow: 3px 3px 1px gray;
@@ -88,7 +84,7 @@
         padding: 0 30px;
         border-radius: 5px;
         max-width: 1000px;
-        height: 500px;
+        height: 300px;
         .login {
             position: absolute;
             top: 50%;

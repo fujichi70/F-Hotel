@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Calendar\CalendarGet;
 use App\Models\Reservation;
+use App\Models\Reserve_day;
+use App\Rules\PeopleSum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -37,25 +39,14 @@ class ReserveController extends Controller
 
     public function confirm(Request $request)
     {
-        $request->validate([
-            'reservation_id' => 'required|integer|digits:7',
-            'room_id' => 'required|integer|digits:2',
-            'lastname' => 'required|string|max:255',
-            'firstname' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
-            'address' => 'required|string|max:255',
-            'tel' => 'required|string|digits_between:9,11',
-            'people' => 'required|string|between:1,2',
-            'men' => 'required|string|between:0,2',
-            'women' => 'required|string|between:0,2',
-            'arrival' => 'required|date|after:yesterday',
-            'departure' => 'required|date|after:arrival',
-            'checkin_time' => 'required|time',
-        ]);
+        $reservation_id = 0;
+        $reservation_id = "#" . str_pad(mt_rand(0, 999999),6 ,0, STR_PAD_LEFT);
+        $room_id = "01";
 
         $reservation = [
-            'reservation_id' => $request->reservation_id,
-            'room_id' => $request->room_id,
+            'reservation_id' => $reservation_id,
+            'room_id' => $room_id,
+            // 'room_id' => $request->room_id,
             'lastname' => $request->lastname,
             'firstname' => $request->firstname,
             'email' => $request->email,
@@ -76,9 +67,10 @@ class ReserveController extends Controller
 
     public function store(Request $request)
     {
+
         try {
             DB::transaction(function () use ($request) {
-                $request->Reservation::create([
+                Reservation::create([
                     'reservation_id' => $request->reservation_id,
                     'room_id' => $request->room_id,
                     'lastname' => $request->lastname,
@@ -99,11 +91,55 @@ class ReserveController extends Controller
             throw $e;
         }
 
-        return to_route('reservation.show')->with(['message' => '予約が完了しました。', 'status' => 'info']);
+        // 宿泊期間を算出(チェックアウト日は含まず)
+        $start = $request->arrival;
+        $end = $request->departure;
+        $days = [];
+        for ($i = date('Ymd', strtotime($start)); $i < date('Ymd', strtotime($end)); $i++) {
+            $year = substr($i, 0, 4);
+            $month = substr($i, 4, 2);
+            $day = substr($i, 6, 2);
+
+            if (checkdate($month, $day, $year))
+                $days[] = date('Y-m-d', strtotime($i));
+        }
+
+        foreach ($days as $day) {
+            Reserve_day::create([
+                'reservation_id' => $request->reservation_id,
+                'room_id' => $request->room_id,
+                'day' => $day,
+            ]);
+        }
+
+
+        $request->session()->regenerateToken();
+
+        return view('reservation.complete', ['message' => '予約が完了しました。', 'reservation_id' => $request->reservation_id]);
     }
 
-    public function show(Request $request)
+    public function standard(Request $request)
     {
-
+        return view('reservation.standard');
+    }
+    public function double(Request $request)
+    {
+        return view('reservation.double');
+    }
+    public function singledelux(Request $request)
+    {
+        return view('reservation.singledelux');
+    }
+    public function semidoubledelux(Request $request)
+    {
+        return view('reservation.semidoubledelux');
+    }
+    public function doubledelux(Request $request)
+    {
+        return view('reservation.doubledelux');
+    }
+    public function highfloor(Request $request)
+    {
+        return view('reservation.highfloor');
     }
 }

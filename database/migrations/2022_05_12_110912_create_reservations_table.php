@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->integer('reservation_id');
+            $table->string('reservation_id', 7)->unique();
             $table->unsignedTinyInteger('room_id');
             $table->string('lastname');
             $table->string('firstname');
