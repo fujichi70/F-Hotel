@@ -24,30 +24,118 @@
 #reservation {
     .search-bar {
         display: flex;
+        // カレンダー
         .search-calendar {
-            .calendar-title--box {
+            background-color: #fff;
+            padding: 20px;
+            .calendar-header {
                 display: flex;
-                .calendar-btn {
-                    font-size: 10px;
-                    cursor: pointer;
-                    color: rgb(0, 75, 50);
-                    border: none;
-                    background-color: rgb(250, 235, 215);
-                    &:nth-of-type(1) {
-                        margin-right: 10px;
-                    }
-                    &:nth-of-type(2) {
-                        margin-left: 10px;
-                    }
-                }
+                align-items: baseline;
+                justify-content: space-around;
 
                 .calendar-title {
-                    font-size: 18px;
+                    font-size: 20px;
                 }
+
+                .calendar-btn {
+                    cursor: pointer;
+                    font-size: 15px;
+                }
+                .btn-left {
+                    margin-right: 10px;
+                    &:hover {
+                        transform: scale(1.08);
+                    }
+                }
+                .btn-right {
+                    margin-left: 10px;
+                    &:hover {
+                        transform: scale(1.08);
+                    }
+                }
+                .arrow {
+                    color: rgb(0, 75, 50);
+                }
+            }
+
+            table {
+                margin: 0 auto;
             }
             thead {
                 tr {
                     th {
+                        background-color: rgb(0, 75, 50);
+                        color: #fff;
+                        border: 1px solid #c5c5c5;
+                        width: 30px;
+                    }
+                    .sat {
+                        background-color: rgb(7, 88, 159);
+                    }
+                    .sun {
+                        background-color: rgb(159, 7, 7);
+                    }
+                }
+            }
+
+            tbody {
+                text-align: right;
+                tr {
+                    td {
+                        border: 1px solid #c5c5c5;
+                        width: 30px;
+                        padding-right: 3px;
+                        &:hover {
+                            background-color: rgb(0, 75, 50);
+                            transform: scale(1.1);
+                            a {
+                                color: #fff;
+                            }
+                        }
+                    }
+                    .day-blank {
+                        visibility: hidden;
+                    }
+                    .day-sat {
+                        background-color: rgb(183, 223, 235);
+                        &:hover {
+                            background-color: rgb(7, 88, 159);
+                            transform: scale(1.1);
+                        }
+                        a {
+                            color: rgb(7, 88, 159);
+                            &:hover {
+                                color: rgb(183, 223, 235);
+                            }
+                        }
+                    }
+
+                    .day-sun {
+                        background-color: rgb(235, 183, 183);
+                        &:hover {
+                            background-color: rgb(159, 7, 7);
+                            transform: scale(1.1);
+                        }
+                        a {
+                            color: rgb(159, 7, 7);
+                            &:hover {
+                                color: rgb(235, 183, 183);
+                            }
+                        }
+                    }
+
+                    .day-holiday {
+                        background-color: rgb(235, 183, 183);
+                        &:hover {
+                            background-color: rgb(159, 7, 7);
+                            transform: scale(1.1);
+                        }
+                        a {
+                            color: rgb(159, 7, 7);
+                            &:hover {
+                                color: rgb(235, 183, 183);
+                            }
+                        }
                     }
                 }
             }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Calendar\CalendarGet;
+use App\Calendar\CalendarView;
 use Illuminate\Http\Request;
 
 class CalendarController extends Controller
@@ -24,7 +24,7 @@ class CalendarController extends Controller
         //取得出来ない時は今月の月にする
         if (!$date)$date = time();
 
-        $calendar = new CalendarGet($date);
+        $calendar = new CalendarView($date);
 
         return view('calendar', [
             "calendar" => $calendar

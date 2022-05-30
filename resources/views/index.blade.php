@@ -35,7 +35,7 @@
 				</div>
 				<div class="grid-text">
 					<h1 class="main-title">
-						<span>落ち着く。<span>癒される。</span>
+						<span>落ち着く。<br><span>癒される。</span>
 					</h1>
 				</div>
 				<div class="middle-left">

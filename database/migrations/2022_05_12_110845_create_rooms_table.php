@@ -16,10 +16,13 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->unsignedTinyInteger('room_id');
+            $table->string('name');
             $table->string('room_name');
+            $table->string('type');
+            $table->smallInteger('people');
             $table->string('img_path');
             $table->decimal('price', 5, 0);
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable();
         });
     }
 

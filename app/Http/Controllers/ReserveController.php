@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Calendar\CalendarGet;
+use App\Calendar\CalendarView;
 use App\Models\Reservation;
 use App\Models\Reserve_day;
+use App\Models\Room;
 use App\Rules\PeopleSum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +16,7 @@ class ReserveController extends Controller
 {
     public function index(Request $request)
     {
-
+        $rooms = Room::get();
         //クエリーのdateを受け取る
         $date = $request->date;
 
@@ -30,17 +31,18 @@ class ReserveController extends Controller
         //取得出来ない時は今月の月にする
         if (!$date) $date = time();
 
-        $calendar = new CalendarGet($date);
+        $calendar = new CalendarView($date);
 
         return view('reservation', [
-            "calendar" => $calendar
+            "calendar" => $calendar,
+            "rooms" => $rooms,
         ]);
     }
 
     public function confirm(Request $request)
     {
         $reservation_id = 0;
-        $reservation_id = "#" . str_pad(mt_rand(0, 999999),6 ,0, STR_PAD_LEFT);
+        $reservation_id = "#" . str_pad(mt_rand(0, 999999), 6, 0, STR_PAD_LEFT);
         $room_id = "01";
 
         $reservation = [
@@ -118,6 +120,39 @@ class ReserveController extends Controller
         return view('reservation.complete', ['message' => '予約が完了しました。', 'reservation_id' => $request->reservation_id]);
     }
 
+    public function show(Request $request)
+    {
+
+        $selectDay = $_POST["day"];
+
+        $ex = Reserve_day::where('day', $selectDay)->get();
+        $roomItem = [];
+        foreach ($ex as $e) {
+            for ($i = 0; $i < 10; $i++) {
+                $roomItem[$e->room_id][$i] += 1;
+        }
+    }
+        // //クエリーのdateを受け取る
+        // $date = $request->date;
+
+        // //dateがYYYY-MMの形式かどうか判定し、日時を文字列に変換、YYYY.MM.01の形にする
+        // if ($date && preg_match("/^[0-9]{4}-[0-9]{2}$/", $date)) {
+        //     $date = $date . "-01";
+        // } elseif ($date && preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/", $date)) {
+        // } else {
+        //     $date = null;
+        // }
+
+        // //取得出来ない時は今月の月にする
+        // if (!$date) $date = time();
+
+        return view('reservation.show', [
+            "selectDay" => $selectDay,
+            "ex" => $ex,
+            "roomItem" => $roomItem,
+        ]);
+    }
+
     public function standard(Request $request)
     {
         return view('reservation.standard');
@@ -126,17 +161,17 @@ class ReserveController extends Controller
     {
         return view('reservation.double');
     }
-    public function singledelux(Request $request)
+    public function standarddelux(Request $request)
     {
-        return view('reservation.singledelux');
+        return view('reservation.standard-delux');
     }
     public function semidoubledelux(Request $request)
     {
-        return view('reservation.semidoubledelux');
+        return view('reservation.semidouble-delux');
     }
     public function doubledelux(Request $request)
     {
-        return view('reservation.doubledelux');
+        return view('reservation.double-delux');
     }
     public function highfloor(Request $request)
     {

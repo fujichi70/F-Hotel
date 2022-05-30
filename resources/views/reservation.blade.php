@@ -1,8 +1,3 @@
-<?php
-
-
-?>
-
 @extends('layouts.app')
 
 @section('content')
@@ -16,14 +11,18 @@
 		<div class="search-bar">
 			<div class="search-calendar">
 				<div class="calendar-header text-center">
-					<a class="btn" href="{{ url('/reservation?date=' . $calendar->getPreviousMonth()) }}">前の月</a>
-					<span>{{ $calendar->getTitle() }}</span>
-					<a class="btn" href="{{ url('/reservation?date=' . $calendar->getNextMonth()) }}">次の月</a>
+					<a class="calendar-btn btn-left"
+						href="{{ url('/reservation?date=' . $calendar->getPreviousMonth()) }}"><i
+							class="fa-solid fa-angles-left"></i>前の月</a>
+					<span class="calendar-title">{{ $calendar->getTitle() }}</span>
+					<a class="calendar-btn btn-right"
+						href="{{ url('/reservation?date=' . $calendar->getNextMonth()) }}">次の月<i
+							class="fa-solid fa-angles-right arrow"></i></a>
 				</div>
-				<form action="" method="post">
+				<form action="{{ route('reservation.show') }}" method="post">
 					@csrf
 					<div class="calendar-body">
-						<input type="button" name="day">{!! $calendar->render() !!}
+						{!! $calendar->render() !!}
 					</div>
 				</form>
 			</div>
@@ -31,12 +30,12 @@
 
 			<div class="search-day">
 				<h3>検索</h3>
-				<form action="" method="post">
+				<form action="" method="get">
 					@csrf
 					<label>ご宿泊予定日</label>
 					<input type="text" name="year" value="{{ $calendar->getYear() }}">年
-					<input type="text" name="year" value="{{ $calendar->getMonth() }}">月
-					<input type="text" name="year" value="{{ $calendar->getDay() }}">日
+					<input type="text" name="month" value="{{ $calendar->getMonth() }}">月
+					<input type="text" name="day" value="{{ $calendar->getDay() }}">日
 					<input type="submit" name="day-submit" value="検索">
 				</form>
 			</div>
@@ -45,17 +44,19 @@
 		<div class="reservation-room">
 			<h3 class="reservation-room--title">お部屋を選択</h3>
 			<div class="reservation-room--box">
+				@foreach ($rooms as $room)
 				<div class="reservation-room--item">
-					<a href="{{ route('standard') }}">
-						<h4 class="reservation-room--name" data-en="Standard">スタンダードルーム</h4>
-						<img src="{{ asset('img/room/standard.jpg') }}" alt="スタンダードルーム">
+					<a href="{{ request()->url() }}/{{ $room->name }}">
+						<h4 class="reservation-room--name" data-en="{{ ucfirst($room->name) }}">{{ $room->room_name }}
+						</h4>
+						<img src="/storage/images/{{ $room->img_path }}" alt="スタンダードルーム">
 						<dl class="room-flex">
 							<dt>ベッド</dt>
-							<dd>シングル</dd>
+							<dd>{{ $room->type }}</dd>
 						</dl>
 						<dl class="room-flex">
 							<dt>定員人数</dt>
-							<dd>1名</dd>
+							<dd>{{ $room->people }}名</dd>
 						</dl>
 						<dl class="room-flex">
 							<dt>お食事</dt>
@@ -63,125 +64,13 @@
 						</dl>
 						<dl class="room-flex">
 							<dt>1名様の料金<br class="room-br">(税込)</dt>
-							<dd>¥18,000円<br class="room-br">（1名様での宿泊時）</dd>
+							<dd>{{ number_format($room->price) }}円<br class="room-br">（1名様での宿泊時）</dd>
 						</dl>
 					</a>
-					<button onclick="location.href='{{ route('standard') }}'" class="btn">この部屋を選択</button>
+					<button onclick="location.href='{{ request()->url() }}/{{ $room->name }}'"
+						class="btn">この部屋を選択</button>
 				</div>
-				<div class="reservation-room--item">
-					<a href="{{ route('double') }}">
-						<img src="{{ asset('img/room/double.jpg') }}" alt="ダブルルーム">
-						<dl class="room-flex">
-							<dt>ベッド</dt>
-							<dd>ダブル</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>定員人数</dt>
-							<dd>2名</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>お食事</dt>
-							<dd>朝食・夕食2食<br class="room-br">（ビュッフェ）</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>1名様の料金<br class="room-br">(税込)</dt>
-							<dd>¥17,000円<br class="room-br">（2名様での宿泊時）</dd>
-						</dl>
-					</a>
-					<button onclick="location.href='{{ route('double') }}'" class="btn">この部屋を選択</button>
-				</div>
-				<div class="reservation-room--item">
-					<a href="{{ route('singledelux') }}">
-						<h4 class="reservation-room--name" data-en="SingleDelux">シングルデラックスルーム</h4>
-						<img src="{{ asset('img/room/single-delux.jpg') }}" alt="">
-						<dl class="room-flex">
-							<dt>ベッド</dt>
-							<dd>シングル</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>定員人数</dt>
-							<dd>1名</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>お食事</dt>
-							<dd>朝食・夕食2食<br class="room-br">（ビュッフェ）</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>1名様の料金<br class="room-br">(税込)</dt>
-							<dd>¥20,000円<br class="room-br">（1名様での宿泊時）</dd>
-						</dl>
-					</a>
-					<button onclick="location.href='{{ route('singledelux') }}'" class="btn">この部屋を選択</button>
-				</div>
-				<div class="reservation-room--item">
-					<a href="{{ route('semidoubledelux') }}">
-						<h4 class="reservation-room--name" data-en="semiDoubleDelux">セミダブルデラックスルーム</h4>
-						<img src="{{ asset('img/room/semidouble-delux.jpg') }}" alt="">
-						<dl class="room-flex">
-							<dt>ベッド</dt>
-							<dd>セミダブル</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>定員人数</dt>
-							<dd>2名</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>お食事</dt>
-							<dd>朝食・夕食2食<br class="room-br">（ビュッフェ）</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>1名様の料金<br class="room-br">(税込)</dt>
-							<dd>¥20,000円<br class="room-br">（2名様での宿泊時）</dd>
-						</dl>
-					</a>
-					<button onclick="location.href='{{ route('semidoubledelux') }}'" class="btn">この部屋を選択</button>
-				</div>
-				<div class="reservation-room--item">
-					<a href="{{ route('doubledelux') }}">
-						<h4 class="reservation-room--name" data-en="DoubleDelux">ダブルデラックスルーム</h4>
-						<img src="{{ asset('img/room/double-delux.jpg') }}" alt="">
-						<dl class="room-flex">
-							<dt>ベッド</dt>
-							<dd>ダブル</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>定員人数</dt>
-							<dd>2名</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>お食事</dt>
-							<dd>朝食・夕食2食<br class="room-br">（ビュッフェ）</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>1名様の料金<br class="room-br">(税込)</dt>
-							<dd>¥23,000円<br class="room-br">（2名様での宿泊時）</dd>
-						</dl>
-					</a>
-					<button onclick="location.href='{{ route('doubledelux') }}'" class="btn">この部屋を選択</button>
-				</div>
-				<div class="reservation-room--item">
-					<a href="{{ route('highfloor') }}">
-						<h4 class="reservation-room--name" data-en="HighFloor">ハイフロアルーム</h4>
-						<img src="{{ asset('img/room/highfloor.jpg') }}" alt="">
-						<dl class="room-flex">
-							<dt>タイプ</dt>
-							<dd>ダブル</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>定員人数</dt>
-							<dd>2名</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>お食事</dt>
-							<dd>朝食・夕食2食<br class="room-br">（ビュッフェ）</dd>
-						</dl>
-						<dl class="room-flex">
-							<dt>1名様の料金<br class="room-br">(税込)</dt>
-							<dd>¥30,000円<br class="room-br">（2名様での宿泊時）</dd>
-						</dl>
-					</a>
-					<button onclick="location.href='{{ route('highfloor') }}'" class="btn">この部屋を選択</button>
-				</div>
+				@endforeach
 			</div><!-- .reservation-room--box -->
 		</div><!-- #room-reservation -->
 

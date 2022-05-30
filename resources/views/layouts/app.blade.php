@@ -26,9 +26,7 @@
 <body>
     <!-- Page Heading -->
     <header id="header">
-        <div class="wrapper">
             <a href="{{ route('top') }}"><img class="logo" src="{{ asset('img/logo.png') }}" alt="logo"></a>
-        </div>
 
         <div class="sp-menu">
             <div class="hamburger">
