@@ -9,7 +9,7 @@
 		</div>
 
 		<div class="search-bar">
-			<div class="search-calendar">
+			<div class="calendar">
 				<div class="calendar-header text-center">
 					<a class="calendar-btn btn-left"
 						href="{{ url('/reservation?date=' . $calendar->getPreviousMonth()) }}"><i

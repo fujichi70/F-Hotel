@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\ReserveController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +23,7 @@ Route::get('/', function() {
     return view('index');
 })->name('top');
 
+// 予約関連ルーティング
 Route::group(['prefix' => 'reservation'], function() {
     Route::get('/', [ReserveController::class, 'index'])->name('reservation');
     Route::get('standard', [ReserveController::class, 'standard'])->name('standard');
@@ -37,12 +38,17 @@ Route::group(['prefix' => 'reservation'], function() {
     Route::post('complete', [ReserveController::class, 'complete'])->name('reservation.complete');
 });
 
+// 管理者関連ルーティング
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::get('/admin.calendar', [SettingController::class, 'index'])->middleware(['auth'])->name('admin.calendar');
+Route::post('/admin.calendar', [SettingController::class, 'index'])->middleware(['auth']);
+Route::post('/admin.setting', [SettingController::class, 'update'])->middleware(['auth'])->name('admin.update');
+
 Route::get('/user', function () {
     return view('user');
-});
+})->name('user');
 
 require __DIR__.'/auth.php';

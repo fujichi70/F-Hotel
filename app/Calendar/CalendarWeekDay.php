@@ -40,10 +40,15 @@ class CalendarWeekDay
 	/**
 	 * 祝日かどうか判定
 	 */
-	public function checkHoliday(Setting $setting) {
+	public function checkHoliday($setting) {
 		if ($setting->isHoliday($this->now)) {
 			$this->isHoliday = true;
 		}
+	}
+
+	function getDateKey()
+	{
+		return $this->now->format("Ymd");
 	}
 
 }

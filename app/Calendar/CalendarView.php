@@ -9,7 +9,7 @@ use Yasumi\Yasumi;
 class CalendarView
 {
 	protected $now;
-	public $holidays = null;
+	protected $setPriceDays = [];
 
 	function __construct($date)
 	{
@@ -68,8 +68,7 @@ class CalendarView
 		$lastDay = $this->now->copy()->lastOfMonth();
 
 		//1週目
-		$week = new CalendarWeek($firstDay->copy());
-		$weeks[] = $week;
+		$weeks[] = $this->getWeek($firstDay->copy());
 
 		//初日をコピーし、1週間後の最初の日付を取得
 		$tmpDay = $firstDay->copy()->addDay(7)->startOfWeek();
@@ -77,14 +76,17 @@ class CalendarView
 		//月末までループ
 		while ($tmpDay->lte($lastDay)) {
 			//週カレンダー
-			$week = new CalendarWeek($tmpDay, count($weeks));
-			$weeks[] = $week;
+			$weeks[] = $this->getWeek($tmpDay->copy(), count($weeks));
 
 			//次の週=+7日する
 			$tmpDay->addDay(7);
 		}
 
 		return $weeks;
+	}
+
+	protected function getWeek(Carbon $date, $index = 0) {
+		return new CalendarWeek($date, $index);
 	}
 
 	/**
@@ -94,6 +96,9 @@ class CalendarView
 	{
 		$setting = new Setting();
 		$setting->loadHoliday($this->now->format('Y'));
+
+		$this->setPriceDays = $setting->getSettingPrice($this->now->format("Ym"));
+		
 		$html = [];
 		$html[] = '<div class="calendar">';
 		$html[] = '<table class="table">';

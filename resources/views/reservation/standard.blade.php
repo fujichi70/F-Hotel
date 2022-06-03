@@ -3,6 +3,22 @@
 @section('content')
 
 <section id="room-detail">
+<div class="calendar">
+				<div class="calendar-header text-center">
+					<a class="calendar-btn btn-left" href="{{ url('/reservation?date=' . $calendar->getPreviousMonth()) }}"><i
+							class="fa-solid fa-angles-left"></i>前の月</a>
+					<span class="calendar-title">{{ $calendar->getTitle() }}</span>
+					<a class="calendar-btn btn-right" href="{{ url('/reservation?date=' . $calendar->getNextMonth()) }}">次の月<i
+							class="fa-solid fa-angles-right arrow"></i></a>
+				</div>
+				<form action="{{ route('reservation.standard') }}" method="post">
+					@csrf
+					<div class="calendar-body">
+						{!! $calendar->render() !!}
+					</div>
+				</form>
+			</div>
+
 	<div class="reservation-room--item">
 		<h4 class="reservation-room--name" data-en="Standard">スタンダードルーム</h4>
 		<img src="{{ asset('img/room/standard.jpg') }}" alt="スタンダードルーム">

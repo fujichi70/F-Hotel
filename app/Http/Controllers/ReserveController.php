@@ -123,15 +123,37 @@ class ReserveController extends Controller
     public function show(Request $request)
     {
 
-        $selectDay = $_POST["day"];
+        $day = $_POST["day"];
 
-        $ex = Reserve_day::where('day', $selectDay)->get();
-        $roomItem = [];
-        foreach ($ex as $e) {
-            for ($i = 0; $i < 10; $i++) {
-                $roomItem[$e->room_id][$i] += 1;
+        $reserves = Reserve_day::where('day', $day)->get();
+
+        $year = substr($day, 0, 4);
+        $month = substr($day, 5, 2);
+        $date = substr($day, 8, 2);
+        $select_day = $year. "年" . $month . "月" . $date . "日";
+
+        if (!empty($reserves)) {
+            $room_id = [
+                1 => 0,
+                2 => 0,
+                3 => 0,
+                4 => 0,
+                5 => 0,
+                6 => 0,
+            ];
+            foreach ($reserves as $reserve) {
+                $room_id[$reserve->room_id] += 1;
+            }
+
+            $full_room = array_keys($room_id, 10);
+
+            $space_rooms = Room::whereNotIn('room_id', $full_room)->get();
+
+        } else {
+            $space_rooms = Room::get();
         }
-    }
+
+
         // //クエリーのdateを受け取る
         // $date = $request->date;
 
@@ -147,15 +169,37 @@ class ReserveController extends Controller
         // if (!$date) $date = time();
 
         return view('reservation.show', [
-            "selectDay" => $selectDay,
-            "ex" => $ex,
-            "roomItem" => $roomItem,
+            "select_day" => $select_day,
+            // "reserves" => $reserves,
+            "space_rooms" => $space_rooms,
         ]);
     }
 
     public function standard(Request $request)
     {
-        return view('reservation.standard');
+        //クエリーのdateを受け取る
+        $date = $request->date;
+
+        //dateがYYYY-MMの形式かどうか判定し、日時を文字列に変換、YYYY.MM.01の形にする
+        if ($date && preg_match("/^[0-9]{4}-[0-9]{2}$/", $date)) {
+            $date = $date . "-01";
+        } elseif ($date && preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/", $date)) {
+        } else {
+            $date = null;
+        }
+
+        //取得出来ない時は今月の月にする
+        if (!$date) $date = time();
+        
+        $calendar = new CalendarView($date);
+
+        $reserves = Reserve_day::where('room_id', 1)->get();
+        
+        return view('reservation.standard', [
+            "calendar" => $calendar,
+        ]);
+
+
     }
     public function double(Request $request)
     {
