@@ -9,7 +9,7 @@ use App\Models\Setting;
 class CalendarFormView extends CalendarView {
 
 	/**
-	 * @return CalendarWeekForm
+	 * @return $week[]
 	 */
 	public function getWeek(Carbon $date, $index = 0)
 	{

@@ -1526,6 +1526,9 @@ a {
 .calendar tbody tr .day-holiday a:hover {
   color: rgb(235, 183, 183);
 }
+.calendar tbody tr .day:hover {
+  color: #fff;
+}
 
 .reservation-title {
   font-size: 19px;

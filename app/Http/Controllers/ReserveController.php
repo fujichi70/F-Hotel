@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Calendar\CalendarView;
+use App\Calendar\Funcs\CalendarGetMonth;
+use App\Calendar\Room\CalendarRoomView;
 use App\Models\Reservation;
 use App\Models\Reserve_day;
 use App\Models\Room;
@@ -127,12 +129,12 @@ class ReserveController extends Controller
 
         $reserves = Reserve_day::where('day', $day)->get();
 
+        if (!empty($reserves)) {
         $year = substr($day, 0, 4);
         $month = substr($day, 5, 2);
         $date = substr($day, 8, 2);
         $select_day = $year. "年" . $month . "月" . $date . "日";
 
-        if (!empty($reserves)) {
             $room_id = [
                 1 => 0,
                 2 => 0,
@@ -177,26 +179,20 @@ class ReserveController extends Controller
 
     public function standard(Request $request)
     {
-        //クエリーのdateを受け取る
-        $date = $request->date;
+        $date = new CalendarGetMonth();
 
-        //dateがYYYY-MMの形式かどうか判定し、日時を文字列に変換、YYYY.MM.01の形にする
-        if ($date && preg_match("/^[0-9]{4}-[0-9]{2}$/", $date)) {
-            $date = $date . "-01";
-        } elseif ($date && preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/", $date)) {
-        } else {
-            $date = null;
-        }
-
-        //取得出来ない時は今月の月にする
-        if (!$date) $date = time();
-        
-        $calendar = new CalendarView($date);
-
+        $room = Room::where('room_id', 1)->get();
         $reserves = Reserve_day::where('room_id', 1)->get();
+        
+        $room_id = null;
+        foreach($room as $val) {
+            $room_id = $val->room_id;
+        }
+        $calendar = new CalendarRoomView($date->getMonth($request), $room_id);
         
         return view('reservation.standard', [
             "calendar" => $calendar,
+            "room" => $room,
         ]);
 
 

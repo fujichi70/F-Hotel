@@ -14,10 +14,10 @@
 
 	<div class="calendar">
 	<div class="calendar-header text-center">
-		<a class="calendar-btn btn-left" href="{{ url('/reservation?date=' . $calendar->getPreviousMonth()) }}"><i
+		<a class="calendar-btn btn-left" href="{{ url('/admin.calendar?date=' . $calendar->getPreviousMonth()) }}"><i
 				class="fa-solid fa-angles-left"></i>前の月</a>
 		<span class="calendar-title">{{ $calendar->getTitle() }}</span>
-		<a class="calendar-btn btn-right" href="{{ url('/reservation?date=' . $calendar->getNextMonth()) }}">次の月<i
+		<a class="calendar-btn btn-right" href="{{ url('/admin.calendar?date=' . $calendar->getNextMonth()) }}">次の月<i
 				class="fa-solid fa-angles-right arrow"></i></a>
 	</div>
 	{{-- <form action="" method="post"> --}}

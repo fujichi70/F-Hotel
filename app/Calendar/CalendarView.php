@@ -9,11 +9,13 @@ use Yasumi\Yasumi;
 class CalendarView
 {
 	protected $now;
+	protected $room_id;
 	protected $setPriceDays = [];
 
-	function __construct($date)
+	function __construct($date, $room_id = null)
 	{
 		$this->now = new Carbon($date);
+		$this->room_id = $room_id;
 	}
 	/**
 	 * タイトル
@@ -121,10 +123,7 @@ class CalendarView
 			$html[] = '<tr class="' . $week->getClassName() . '">';
 			$days = $week->getDays($setting);
 			foreach ($days as $day) {
-				$html[] = '<td class="' . $day->getClassName() . '">';
-				$html[] = $day->render();
-				$html[] = '</a>';
-				$html[] = '</td>';
+				$html[] = $this->renderDay($day);
 			}
 			$html[] = '</tr>';
 		}
@@ -134,6 +133,15 @@ class CalendarView
 
 		$html[] = '</table>';
 		$html[] = '</div>';
+		return implode("", $html);
+	}
+
+	protected function renderDay(CalendarWeekDay $day)
+	{
+		$html = [];
+		$html[] = '<td class="' . $day->getClassName() . '">';
+		$html[] = $day->render();
+		$html[] = '</td>';
 		return implode("", $html);
 	}
 
