@@ -34,6 +34,9 @@ class Setting extends Model
         return $this->holidays->isHoliday($date);
     }
 
+    /** 
+     * 価格設定されているか判定する
+    */
     public function isAseason()
     {
         return $this->season_flag == Setting::A_season;
@@ -50,7 +53,7 @@ class Setting extends Model
     }
 
     /**
-     * 指定した月の価格設定取得
+     * 指定した月の価格設定した日付を取得（キーを日付にする）
      * @return $setPriceDay[]
      */
     public static function getSettingPrice($ym)
@@ -92,9 +95,9 @@ class Setting extends Model
         }
     }
 
-
+// リレーション
     public function Season()
     {
-        $this->belongsTo(Season::class, 'season_flag', 'season');
+        return $this->belongsTo(Season::class, 'season_flag', 'season');
     }
 }

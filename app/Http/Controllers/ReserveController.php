@@ -8,6 +8,8 @@ use App\Calendar\Room\CalendarRoomView;
 use App\Models\Reservation;
 use App\Models\Reserve_day;
 use App\Models\Room;
+use App\Models\Season;
+use App\Models\Setting;
 use App\Rules\PeopleSum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -127,94 +129,103 @@ class ReserveController extends Controller
 
         $day = $_POST["day"];
 
-        $reserves = Reserve_day::where('day', $day)->get();
+        // $reserves = Reserve_day::where('day', $day)->get();
 
-        if (!empty($reserves)) {
-        $year = substr($day, 0, 4);
-        $month = substr($day, 5, 2);
-        $date = substr($day, 8, 2);
-        $select_day = $year. "年" . $month . "月" . $date . "日";
+        // if (!empty($reserves)) {
+        // $year = substr($day, 0, 4);
+        // $month = substr($day, 5, 2);
+        // $date = substr($day, 8, 2);
+        // $select_day = $year. "年" . $month . "月" . $date . "日";
 
-            $room_id = [
-                1 => 0,
-                2 => 0,
-                3 => 0,
-                4 => 0,
-                5 => 0,
-                6 => 0,
-            ];
-            foreach ($reserves as $reserve) {
-                $room_id[$reserve->room_id] += 1;
-            }
+        //     $room_id = [
+        //         1 => 0,
+        //         2 => 0,
+        //         3 => 0,
+        //         4 => 0,
+        //         5 => 0,
+        //         6 => 0,
+        //     ];
+        //     foreach ($reserves as $reserve) {
+        //         $room_id[$reserve->room_id] += 1;
+        //     }
 
-            $full_room = array_keys($room_id, 10);
+        //     $full_room = array_keys($room_id, 10);
 
-            $space_rooms = Room::whereNotIn('room_id', $full_room)->get();
+        //     $space_rooms = Room::whereNotIn('room_id', $full_room)->get();
 
-        } else {
-            $space_rooms = Room::get();
-        }
-
-
-        // //クエリーのdateを受け取る
-        // $date = $request->date;
-
-        // //dateがYYYY-MMの形式かどうか判定し、日時を文字列に変換、YYYY.MM.01の形にする
-        // if ($date && preg_match("/^[0-9]{4}-[0-9]{2}$/", $date)) {
-        //     $date = $date . "-01";
-        // } elseif ($date && preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/", $date)) {
         // } else {
-        //     $date = null;
+        //     $space_rooms = Room::get();
         // }
 
-        // //取得出来ない時は今月の月にする
-        // if (!$date) $date = time();
+        // $day = str_replace('-','', $day);
+        // $priceSettings = Setting::where('date_key', $day)->with('season')->get();
+        
+        // if(!empty($priceSettings)) {
+        //     $priceUp = 0;
+        //     foreach ($priceSettings as $priceSetting) {
+        //         $priceUp = $priceSetting->season->priceup;
+        //     }
+        // }
 
         return view('reservation.show', [
-            "select_day" => $select_day,
-            // "reserves" => $reserves,
-            "space_rooms" => $space_rooms,
+            // "select_day" => $select_day,
+            // "space_rooms" => $space_rooms,
+            // "priceUp" => $priceUp,
+            "day" => $day,
         ]);
     }
 
-    public function standard(Request $request)
+    public function room(Request $request, $room_id)
     {
         $date = new CalendarGetMonth();
 
-        $room = Room::where('room_id', 1)->get();
-        $reserves = Reserve_day::where('room_id', 1)->get();
+        $selectRoom = Room::where('room_id', $room_id)->with('reserve_day')->get();
+        $reserves = Reserve_day::where('room_id', $room_id)->get();
         
-        $room_id = null;
-        foreach($room as $val) {
-            $room_id = $val->room_id;
-        }
         $calendar = new CalendarRoomView($date->getMonth($request), $room_id);
         
-        return view('reservation.standard', [
+        return view('reservation.room', [
+            "selectRoom" => $selectRoom,
             "calendar" => $calendar,
-            "room" => $room,
         ]);
 
 
     }
-    public function double(Request $request)
+
+    public function selectDayRoom(Request $request, $room_id)
     {
-        return view('reservation.double');
+        $date = new CalendarGetMonth();
+
+        $selectRoom = Room::where('room_id', $room_id)->get();
+        $reserves = Reserve_day::where('room_id', $room_id)->get();
+        
+        $calendar = new CalendarRoomView($date->getMonth($request), $room_id);
+        
+        return view('reservation.room', [
+            "selectRoom" => $selectRoom,
+            "calendar" => $calendar,
+        ]);
+
+
     }
-    public function standarddelux(Request $request)
+
+    
+    public function selectDate(Request $request, $date)
     {
-        return view('reservation.standard-delux');
-    }
-    public function semidoubledelux(Request $request)
-    {
-        return view('reservation.semidouble-delux');
-    }
-    public function doubledelux(Request $request)
-    {
-        return view('reservation.double-delux');
-    }
-    public function highfloor(Request $request)
-    {
-        return view('reservation.highfloor');
+        // $room = Room::all->get();
+        // $reserves = Reserve_day::where('day', $date)->get();
+
+        // if(isset($reserves)) {
+
+        // }
+        
+        // $calendar = new CalendarRoomView($date->getMonth($request));
+        
+        // return response()->json(
+        //     [
+        //         'list' => view('reservation', [""])->render()
+        //     ]);
+
+
     }
 }

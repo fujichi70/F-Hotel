@@ -1484,6 +1484,9 @@ a {
 .calendar tbody tr td:hover a {
   color: #fff;
 }
+.calendar tbody tr td .room-full {
+  text-align: center;
+}
 .calendar tbody tr .day-blank {
   visibility: hidden;
 }
@@ -1499,6 +1502,24 @@ a {
 }
 .calendar tbody tr .day-sat a:hover {
   color: rgb(183, 223, 235);
+}
+.calendar tbody tr .hidden {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-color: #fff;
+  color: #c5c5c5;
+}
+.calendar tbody tr .hidden .day {
+  color: rgb(0, 51, 35);
+}
+.calendar tbody tr .hidden:hover {
+  background-color: #fff;
+  transform: scale(1);
+}
+.calendar tbody tr .hidden a:hover {
+  color: #c5c5c5;
 }
 .calendar tbody tr .day-sun {
   background-color: rgb(235, 183, 183);
@@ -12120,3 +12141,7 @@ readers do not read off random characters that represent icons */
 .fa-zhihu:before {
   content: "\f63f";
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

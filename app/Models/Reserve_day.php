@@ -15,5 +15,9 @@ class Reserve_day extends Model
         'day'
     ];
 
+    public function Room()
+    {
+        return $this->hasMany(Room::class, 'room_id', 'room_id');
+    }
 
 }

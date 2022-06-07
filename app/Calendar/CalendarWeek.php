@@ -58,6 +58,7 @@ class CalendarWeek
 	}
 
 	/** 
+	 * 祝日か判定し格納
 	 * @return CalendarWeekDay
 	 */
 	function getDay(Carbon $date, Setting $setting)

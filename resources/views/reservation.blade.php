@@ -46,7 +46,7 @@
 			<div class="reservation-room--box">
 				@foreach ($rooms as $room)
 				<div class="reservation-room--item">
-					<a href="{{ request()->url() }}/{{ $room->name }}">
+					<a href="{{ request()->url() }}/room/{{ $room->room_id }}">
 						<h4 class="reservation-room--name" data-en="{{ ucfirst($room->name) }}">{{ $room->room_name }}
 						</h4>
 						<img src="/storage/images/{{ $room->img_path }}" alt="{{ $room->name }}">

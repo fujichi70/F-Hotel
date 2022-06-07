@@ -1,6 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
+	
 <section id="user-auth">
 	<div class="wrapper">
 		<h1 class="user-title">年間価格設定ページ</h1>
@@ -31,4 +32,4 @@
 </div>
 </section>
 
-@endsection
+@endcomponent

@@ -2,6 +2,7 @@
 
 namespace App\Calendar;
 
+use App\Models\Reserve_day;
 use App\Models\Setting;
 use Carbon\Carbon;
 use Yasumi\Yasumi;
@@ -100,7 +101,7 @@ class CalendarView
 		$setting->loadHoliday($this->now->format('Y'));
 
 		$this->setPriceDays = $setting->getSettingPrice($this->now->format("Ym"));
-		
+
 		$html = [];
 		$html[] = '<div class="calendar">';
 		$html[] = '<table class="table">';

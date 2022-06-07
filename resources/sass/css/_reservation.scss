@@ -21,206 +21,262 @@
     }
 }
 
-    .search-bar {
+.search-bar {
+    display: flex;
+}
+
+// カレンダー
+.calendar {
+    background-color: #fff;
+    padding: 20px;
+    .calendar-header {
         display: flex;
+        align-items: baseline;
+        justify-content: space-around;
+
+        .calendar-title {
+            font-size: 20px;
+        }
+
+        .calendar-btn {
+            cursor: pointer;
+            font-size: 15px;
+        }
+        .btn-left {
+            margin-right: 10px;
+            &:hover {
+                transform: scale(1.08);
+            }
+        }
+        .btn-right {
+            margin-left: 10px;
+            &:hover {
+                transform: scale(1.08);
+            }
+        }
+        .arrow {
+            color: rgb(0, 75, 50);
+        }
     }
 
-        // カレンダー
-        .calendar {
-            background-color: #fff;
-            padding: 20px;
-            .calendar-header {
-                display: flex;
-                align-items: baseline;
-                justify-content: space-around;
-
-                .calendar-title {
-                    font-size: 20px;
-                }
-
-                .calendar-btn {
-                    cursor: pointer;
-                    font-size: 15px;
-                }
-                .btn-left {
-                    margin-right: 10px;
-                    &:hover {
-                        transform: scale(1.08);
-                    }
-                }
-                .btn-right {
-                    margin-left: 10px;
-                    &:hover {
-                        transform: scale(1.08);
-                    }
-                }
-                .arrow {
-                    color: rgb(0, 75, 50);
-                }
+    table {
+        margin: 0 auto;
+    }
+    thead {
+        tr {
+            th {
+                background-color: rgb(0, 75, 50);
+                color: #fff;
+                border: 1px solid #c5c5c5;
+                width: 30px;
             }
-
-            table {
-                margin: 0 auto;
+            .sat {
+                background-color: rgb(7, 88, 159);
             }
-            thead {
-                tr {
-                    th {
-                        background-color: rgb(0, 75, 50);
+            .sun {
+                background-color: rgb(159, 7, 7);
+            }
+        }
+    }
+
+    tbody {
+        text-align: right;
+        tr {
+            td {
+                border: 1px solid #c5c5c5;
+                width: 30px;
+                padding-right: 3px;
+                &:hover {
+                    background-color: rgb(0, 75, 50);
+                    transform: scale(1.1);
+                    a {
                         color: #fff;
-                        border: 1px solid #c5c5c5;
-                        width: 30px;
                     }
-                    .sat {
-                        background-color: rgb(7, 88, 159);
+                }
+
+                .room-full {
+                    text-align: center;
+                }
+            }
+            .day-blank {
+                visibility: hidden;
+            }
+            .day-sat {
+                background-color: rgb(183, 223, 235);
+                &:hover {
+                    background-color: rgb(7, 88, 159);
+                    transform: scale(1.1);
+                }
+                a {
+                    color: rgb(7, 88, 159);
+                    &:hover {
+                        color: rgb(183, 223, 235);
                     }
-                    .sun {
-                        background-color: rgb(159, 7, 7);
+                }
+            }
+            .hidden {
+                user-select: none;
+                background-color: #fff;
+                color: #c5c5c5;
+                .day {
+                    color: rgb(0, 51, 35);
+                }
+
+                &:hover {
+                    background-color: #fff;
+                    transform: scale(1);
+                }
+                a {
+                    &:hover {
+                        color: #c5c5c5;
                     }
                 }
             }
 
-            tbody {
-                text-align: right;
-                tr {
-                    td {
-                        border: 1px solid #c5c5c5;
-                        width: 30px;
-                        padding-right: 3px;
-                        &:hover {
-                            background-color: rgb(0, 75, 50);
-                            transform: scale(1.1);
-                            a {
-                                color: #fff;
-                            }
-                        }
-                    }
-                    .day-blank {
-                        visibility: hidden;
-                    }
-                    .day-sat {
-                        background-color: rgb(183, 223, 235);
-                        &:hover {
-                            background-color: rgb(7, 88, 159);
-                            transform: scale(1.1);
-                        }
-                        a {
-                            color: rgb(7, 88, 159);
-                            &:hover {
-                                color: rgb(183, 223, 235);
-                            }
-                        }
-                    }
-
-                    .day-sun {
-                        background-color: rgb(235, 183, 183);
-                        &:hover {
-                            background-color: rgb(159, 7, 7);
-                            transform: scale(1.1);
-                        }
-                        a {
-                            color: rgb(159, 7, 7);
-                            &:hover {
-                                color: rgb(235, 183, 183);
-                            }
-                        }
-                    }
-
-                    .day-holiday {
-                        background-color: rgb(235, 183, 183);
-                        &:hover {
-                            background-color: rgb(159, 7, 7);
-                            transform: scale(1.1);
-                        }
-                        a {
-                            color: rgb(159, 7, 7);
-                            &:hover {
-                                color: rgb(235, 183, 183);
-                            }
-                        }
-                    }
-
-                    .day {
-                        &:hover {
-                            color: #fff;
-                        }
+            .day-sun {
+                background-color: rgb(235, 183, 183);
+                &:hover {
+                    background-color: rgb(159, 7, 7);
+                    transform: scale(1.1);
+                }
+                a {
+                    color: rgb(159, 7, 7);
+                    &:hover {
+                        color: rgb(235, 183, 183);
                     }
                 }
             }
-        }
 
-        .search-day {
+            .day-holiday {
+                background-color: rgb(235, 183, 183);
+                &:hover {
+                    background-color: rgb(159, 7, 7);
+                    transform: scale(1.1);
+                }
+                a {
+                    color: rgb(159, 7, 7);
+                    &:hover {
+                        color: rgb(235, 183, 183);
+                    }
+                }
+            }
+
+            .day {
+                &:hover {
+                    color: #fff;
+                }
+            }
         }
-    
-    .reservation-title {
-        font-size: 19px;
-        text-align: center;
-        margin: 50px 0;
     }
+}
 
-    .reservation-form {
-        font-size: 16px;
-        max-width: 600px;
-        margin: 0 auto 20px;
-        border: 1px solid rgb(0, 51, 35);
-        padding: 20px;
-        dl {
-            .name {
-                align-items: center;
-                dt {
-                    margin-right: 10px;
-                    margin-bottom: 10px;
+.search-day {
+}
+
+.reservation-title {
+    font-size: 19px;
+    text-align: center;
+    margin: 50px 0;
+}
+
+.reservation-form {
+    font-size: 16px;
+    max-width: 600px;
+    margin: 0 auto 20px;
+    border: 1px solid rgb(0, 51, 35);
+    padding: 20px;
+    dl {
+        .name {
+            align-items: center;
+            dt {
+                margin-right: 10px;
+                margin-bottom: 10px;
+            }
+            dd {
+                margin-right: 20px;
+                margin-bottom: 10px;
+            }
+        }
+
+        dt {
+            margin-bottom: 3px;
+        }
+
+        dd {
+            margin-bottom: 15px;
+            max-width: 500px;
+
+            .input-area {
+                padding: 5px 10px;
+                border-radius: 5px;
+                border: 1px solid rgb(0, 51, 35);
+                width: 200px;
+            }
+            .input-name {
+                width: 100px;
+            }
+
+            .input-tel {
+                width: 400px;
+            }
+
+            .input-address {
+                width: 400px;
+            }
+
+            .radio {
+                display: none;
+
+                &:checked + .radio-text {
+                    background: rgb(0, 51, 35);
+                    color: #ffffff;
                 }
-                dd {
-                    margin-right: 20px;
-                    margin-bottom: 10px;
+                &:hover + .radio-text {
+                    transform: scale(1.1);
                 }
             }
 
+            .radio-text {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 5px;
+                width: 60px;
+                height: 30px;
+                padding-left: 5px;
+                padding-right: 5px;
+                text-align: center;
+                cursor: pointer;
+                border: 2px solid rgb(0, 51, 35);
+                border-radius: 5px;
+            }
+        }
+    }
+    .btn {
+        margin: 0 auto;
+    }
+    .error {
+        font-family: sans-serif;
+        font-weight: bold;
+        font-size: 13px;
+        color: rgb(214, 0, 0);
+        padding-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 959px) {
+    .reservation-form {
+        dl {
             dt {
-                margin-bottom: 3px;
             }
 
             dd {
-                margin-bottom: 15px;
-                max-width: 500px;
-
-                .input-area {
-                    padding: 5px 10px;
-                    border-radius: 5px;
-                    border: 1px solid rgb(0, 51, 35);
-                    width: 200px;
-                }
-                .input-name {
-                    width: 100px;
-                }
-
-                .input-tel {
-                    width: 400px;
-                }
-
-                .input-address {
-                    width: 400px;
-                }
-
                 .radio {
-                    display: none;
-
-                    &:checked + .radio-text {
-                        background: rgb(0, 51, 35);
-                        color: #ffffff;
-                    }
-                    &:hover + .radio-text {
-                        transform: scale(1.1);
-                    }
                 }
 
                 .radio-text {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    margin: 5px;
-                    width: 60px;
-                    height: 30px;
+                    width: 80px;
+                    height: 40px;
                     padding-left: 5px;
                     padding-right: 5px;
                     text-align: center;
@@ -228,70 +284,35 @@
                     border: 2px solid rgb(0, 51, 35);
                     border-radius: 5px;
                 }
-            }
-        }
-        .btn {
-            margin: 0 auto;
-        }
-        .error {
-            font-family: sans-serif;
-            font-weight: bold;
-            font-size: 13px;
-            color: rgb(214, 0, 0);
-            padding-bottom: 10px;
-        }
-    }
 
-    @media screen and (max-width: 959px) {
-        .reservation-form {
-            dl {
-                dt {
+                select {
+                    padding: 5px 10px;
+                    border-radius: 5px;
                 }
 
-                dd {
-                    .radio {
-                    }
-
-                    .radio-text {
-                        width: 80px;
-                        height: 40px;
-                        padding-left: 5px;
-                        padding-right: 5px;
-                        text-align: center;
-                        cursor: pointer;
-                        border: 2px solid rgb(0, 51, 35);
-                        border-radius: 5px;
-                    }
-
-                    select {
-                        padding: 5px 10px;
-                        border-radius: 5px;
-                    }
-
-                    .input-arrival {
+                .input-arrival {
+                    display: block;
+                    .input-area {
                         display: block;
-                        .input-area {
-                            display: block;
-                            margin-bottom: 20px;
-                        }
+                        margin-bottom: 20px;
                     }
                 }
             }
         }
     }
+}
 
-    @media screen and (max-width: 450px) {
-        .reservation-form {
-            dl {
-                dd {
-                    .input-address {
-                        width: 310px;
-                    }
+@media screen and (max-width: 450px) {
+    .reservation-form {
+        dl {
+            dd {
+                .input-address {
+                    width: 310px;
                 }
             }
         }
     }
-
+}
 
 // 部屋部分（詳細ページでも引用）
 .reservation-room {

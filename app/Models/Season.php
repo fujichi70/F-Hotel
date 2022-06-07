@@ -10,7 +10,7 @@ class Season extends Model
     use HasFactory;
 
     public function Setting() {
-        $this->hasMany(Setting::class, 'season_flag', 'season');
+        return $this->hasMany(Setting::class, 'season_flag', 'season');
     }
 }
 

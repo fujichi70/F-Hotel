@@ -48,7 +48,7 @@ class CalendarWeekDay
 
 	function getDateKey()
 	{
-		return $this->now->format("Ymd");
+		return $this->now->format("Y-m-d");
 	}
 
 }

@@ -26,12 +26,9 @@ Route::get('/', function() {
 // 予約関連ルーティング
 Route::group(['prefix' => 'reservation'], function() {
     Route::get('/', [ReserveController::class, 'index'])->name('reservation');
-    Route::get('standard', [ReserveController::class, 'standard'])->name('reservation.standard');
-    Route::get('double', [ReserveController::class, 'double'])->name('reservation.double');
-    Route::get('standard-delux', [ReserveController::class, 'standarddelux'])->name('reservation.standard-delux');
-    Route::get('semidouble-delux', [ReserveController::class, 'semidoubledelux'])->name('reservation.semidouble-delux');
-    Route::get('double-delux', [ReserveController::class, 'doubledelux'])->name('reservation.double-delux');
-    Route::get('highfloor', [ReserveController::class, 'highfloor'])->name('reservation.highfloor');
+    Route::post('/{date}', [ReserveController::class, 'selectDate'])->name('reservation.selectDate');
+    Route::get('room/{room_id}', [ReserveController::class, 'room']);
+    Route::post('room/{room_id}', [ReserveController::class, 'selectDayRoom']);
     Route::post('confirm', [ReserveController::class, 'confirm'])->name('reservation.confirm');
     Route::post('store', [ReserveController::class, 'store'])->name('reservation.store')->middleware('throttle:3, 1');
     Route::post('show', [ReserveController::class, 'show'])->name('reservation.show');
@@ -43,11 +40,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/admin.calendar', [SettingController::class, 'index'])->middleware(['auth'])->name('admin.calendar');
-Route::post('/admin.calendar', [SettingController::class, 'index'])->middleware(['auth']);
-Route::post('/admin.setting', [SettingController::class, 'update'])->middleware(['auth'])->name('admin.update');
+Route::get('admin.calendar', [SettingController::class, 'index'])->middleware(['auth'])->name('admin.calendar');
+Route::post('admin.calendar', [SettingController::class, 'index'])->middleware(['auth']);
+Route::post('admin.setting', [SettingController::class, 'update'])->middleware(['auth'])->name('admin.update');
 
-Route::get('/user', function () {
+Route::get('user', function () {
     return view('user');
 })->name('user');
 

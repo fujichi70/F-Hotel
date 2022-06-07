@@ -18,7 +18,7 @@ class CalendarWeekDayForm extends CalendarWeekDay
 	function render()
 	{
 		//selectタグの名前
-		$select_form_name = "season[" . $this->now->format("Ymd") . "][season_flag]";
+		$select_form_name = "season[" . $this->now->format("Y-m-d") . "][season_flag]";
 
 		$isSelectA = ($this->setPriceDay && $this->setPriceDay->isAseason()) ? 'selected' : '';
 		$isSelectB = ($this->setPriceDay && $this->setPriceDay->isBseason()) ? 'selected' : '';
