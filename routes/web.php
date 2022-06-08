@@ -26,12 +26,12 @@ Route::get('/', function() {
 // 予約関連ルーティング
 Route::group(['prefix' => 'reservation'], function() {
     Route::get('/', [ReserveController::class, 'index'])->name('reservation');
-    Route::post('/{date}', [ReserveController::class, 'selectDate'])->name('reservation.selectDate');
+    Route::post('/', [ReserveController::class, 'selectDate']);
+    // Route::post('show', [ReserveController::class, 'show'])->name('reservation.show');
     Route::get('room/{room_id}', [ReserveController::class, 'room']);
     Route::post('room/{room_id}', [ReserveController::class, 'selectDayRoom']);
     Route::post('confirm', [ReserveController::class, 'confirm'])->name('reservation.confirm');
     Route::post('store', [ReserveController::class, 'store'])->name('reservation.store')->middleware('throttle:3, 1');
-    Route::post('show', [ReserveController::class, 'show'])->name('reservation.show');
     Route::post('complete', [ReserveController::class, 'complete'])->name('reservation.complete');
 });
 

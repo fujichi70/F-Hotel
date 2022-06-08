@@ -2,9 +2,7 @@
 
 @section('content')
 
-var_dump($day);
-
-{{-- <div class="reservation-room">
+<div class="reservation-room">
 			<h3 class="reservation-room--title">お部屋を選択</h3>
 			<div class="reservation-room--box">
 				@foreach ($space_rooms as $space_room)
@@ -38,5 +36,5 @@ var_dump($day);
 
 		<div class="day-select">
 			<p>日付：{{ $select_day }}選択中</p>
-		</div> --}}
+		</div>
 @endsection

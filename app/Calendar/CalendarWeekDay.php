@@ -34,7 +34,7 @@ class CalendarWeekDay
 	public function render()
 	{
 		// return '<a href="/reservation?date='. $this->now->format("Y-m-d") .'"><p class="day">' . $this->now->format("j") . '</p>';
-		return '<input class="day" type="submit" value="'.$this->now->format("Y-m-d").'" name="day">' . $this->now->format("j");
+		return '<input class="day" type="button" value="'.$this->now->format("Y-m-d").'" name="day">' . $this->now->format("j");
 	}
 
 	/**

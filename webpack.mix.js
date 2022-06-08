@@ -15,6 +15,7 @@ mix.js("resources/js/app.js", "public/js")
     .js("resources/js/bootstrap.js", "public/js")
     .js("resources/js/swiper.js", "public/js")
     .js("resources/js/main.js", "public/js")
+    .js("resources/js/ajax.js", "public/js")
     .autoload({ jquery: ["$", "window.jQuery"] })
     .sass("resources/sass/style.scss", "public/css")
     .postCss("resources/css/app.css", "public/css", [

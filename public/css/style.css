@@ -12141,7 +12141,3 @@ readers do not read off random characters that represent icons */
 .fa-zhihu:before {
   content: "\f63f";
 }
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;

@@ -26,7 +26,7 @@
 <body>
     <!-- Page Heading -->
     <header id="header">
-            <a href="{{ route('top') }}"><img class="logo" src="{{ asset('img/logo.png') }}" alt="logo"></a>
+        <a href="{{ route('top') }}"><img class="logo" src="{{ asset('img/logo.png') }}" alt="logo"></a>
 
         <div class="sp-menu">
             <div class="hamburger">
@@ -53,6 +53,7 @@
     <footer id="footer">
         <p class="name">&copy; F HOTEL</p>
     </footer>
+    @yield('js')
 </body>
 
 </html>

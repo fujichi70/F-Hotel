@@ -21,21 +21,9 @@ class ReserveController extends Controller
     public function index(Request $request)
     {
         $rooms = Room::get();
-        //クエリーのdateを受け取る
-        $date = $request->date;
 
-        //dateがYYYY-MMの形式かどうか判定し、日時を文字列に変換、YYYY.MM.01の形にする
-        if ($date && preg_match("/^[0-9]{4}-[0-9]{2}$/", $date)) {
-            $date = $date . "-01";
-        } elseif ($date && preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/", $date)) {
-        } else {
-            $date = null;
-        }
-
-        //取得出来ない時は今月の月にする
-        if (!$date) $date = time();
-
-        $calendar = new CalendarView($date);
+        $date = new CalendarGetMonth();
+        $calendar = new CalendarView($date->getMonth($request));
 
         return view('reservation', [
             "calendar" => $calendar,
@@ -129,48 +117,47 @@ class ReserveController extends Controller
 
         $day = $_POST["day"];
 
-        // $reserves = Reserve_day::where('day', $day)->get();
+        $reserves = Reserve_day::where('day', $day)->get();
 
-        // if (!empty($reserves)) {
-        // $year = substr($day, 0, 4);
-        // $month = substr($day, 5, 2);
-        // $date = substr($day, 8, 2);
-        // $select_day = $year. "年" . $month . "月" . $date . "日";
+        if (!empty($reserves)) {
+            $year = substr($day, 0, 4);
+            $month = substr($day, 5, 2);
+            $date = substr($day, 8, 2);
+            $select_day = $year . "年" . $month . "月" . $date . "日";
 
-        //     $room_id = [
-        //         1 => 0,
-        //         2 => 0,
-        //         3 => 0,
-        //         4 => 0,
-        //         5 => 0,
-        //         6 => 0,
-        //     ];
-        //     foreach ($reserves as $reserve) {
-        //         $room_id[$reserve->room_id] += 1;
-        //     }
+            $room_id = [
+                1 => 0,
+                2 => 0,
+                3 => 0,
+                4 => 0,
+                5 => 0,
+                6 => 0,
+            ];
+            foreach ($reserves as $reserve) {
+                $room_id[$reserve->room_id] += 1;
+            }
 
-        //     $full_room = array_keys($room_id, 10);
+            $full_room = array_keys($room_id, 10);
 
-        //     $space_rooms = Room::whereNotIn('room_id', $full_room)->get();
+            $space_rooms = Room::whereNotIn('room_id', $full_room)->get();
+        } else {
+            $space_rooms = Room::get();
+        }
 
-        // } else {
-        //     $space_rooms = Room::get();
-        // }
+        $day = str_replace('-', '', $day);
+        $priceSettings = Setting::where('date_key', $day)->with('season')->get();
 
-        // $day = str_replace('-','', $day);
-        // $priceSettings = Setting::where('date_key', $day)->with('season')->get();
-        
-        // if(!empty($priceSettings)) {
-        //     $priceUp = 0;
-        //     foreach ($priceSettings as $priceSetting) {
-        //         $priceUp = $priceSetting->season->priceup;
-        //     }
-        // }
+        if (!empty($priceSettings)) {
+            $priceUp = 0;
+            foreach ($priceSettings as $priceSetting) {
+                $priceUp = $priceSetting->season->priceup;
+            }
+        }
 
         return view('reservation.show', [
-            // "select_day" => $select_day,
-            // "space_rooms" => $space_rooms,
-            // "priceUp" => $priceUp,
+            "select_day" => $select_day,
+            "space_rooms" => $space_rooms,
+            "priceUp" => $priceUp,
             "day" => $day,
         ]);
     }
@@ -181,15 +168,13 @@ class ReserveController extends Controller
 
         $selectRoom = Room::where('room_id', $room_id)->with('reserve_day')->get();
         $reserves = Reserve_day::where('room_id', $room_id)->get();
-        
+
         $calendar = new CalendarRoomView($date->getMonth($request), $room_id);
-        
+
         return view('reservation.room', [
             "selectRoom" => $selectRoom,
             "calendar" => $calendar,
         ]);
-
-
     }
 
     public function selectDayRoom(Request $request, $room_id)
@@ -198,33 +183,66 @@ class ReserveController extends Controller
 
         $selectRoom = Room::where('room_id', $room_id)->get();
         $reserves = Reserve_day::where('room_id', $room_id)->get();
-        
+
         $calendar = new CalendarRoomView($date->getMonth($request), $room_id);
-        
+
         return view('reservation.room', [
             "selectRoom" => $selectRoom,
             "calendar" => $calendar,
         ]);
-
-
     }
 
-    
-    public function selectDate(Request $request, $date)
+
+    public function selectDate(Request $request)
     {
-        // $room = Room::all->get();
-        // $reserves = Reserve_day::where('day', $date)->get();
 
-        // if(isset($reserves)) {
+        $day = $request->day;
+        
+        $reserves = Reserve_day::where('day', $day)->get();
 
-        // }
-        
-        // $calendar = new CalendarRoomView($date->getMonth($request));
-        
-        // return response()->json(
-        //     [
-        //         'list' => view('reservation', [""])->render()
-        //     ]);
+        $date = new CalendarGetMonth();
+
+            if (!empty($reserves)) {
+                $year = substr($day, 0, 4);
+                $month = substr($day, 5, 2);
+                $date = substr($day, 8, 2);
+                $select_day = $year . "年" . $month . "月" . $date . "日";
+
+                $room_id = [
+                    1 => 0,
+                    2 => 0,
+                    3 => 0,
+                    4 => 0,
+                    5 => 0,
+                    6 => 0,
+                ];
+                foreach ($reserves as $reserve) {
+                    $room_id[$reserve->room_id] += 1;
+                }
+
+                $full_room = array_keys($room_id, 10);
+
+                $rooms = Room::whereNotIn('room_id', $full_room)->get();
+            } else {
+                $rooms = Room::get();
+            }
+
+            $priceSettings = Setting::where('date_key', $day)->with('season')->get();
+
+            if (!empty($priceSettings)) {
+                $priceUp = 0;
+                foreach ($priceSettings as $priceSetting) {
+                    $priceUp = $priceSetting->season->priceup;
+                }
+            }
+
+            return response()->json(
+                [
+                        "select_day" => $select_day,
+                        "rooms" => $rooms,
+                        "priceUp" => $priceUp,
+                        "day" => $day,
+                ]);
 
 
     }
