@@ -18,48 +18,18 @@ class CalendarView
 		$this->now = new Carbon($date);
 		$this->room_id = $room_id;
 	}
+
 	/**
-	 * タイトル
+	 * 年月取得
 	 */
 	public function getTitle()
 	{
 		return $this->now->format('Y年n月');
 	}
-
+	
 	/**
-	 * 現在の年を取得
+	 * 週をループし１か月分のカレンダー取得
 	 */
-	public function getYear()
-	{
-		return $this->now->format('Y');
-	}
-
-	/**
-	 * 現在の月を取得
-	 */
-	public function getMonth()
-	{
-		return $this->now->format('m');
-	}
-
-	/**
-	 * 現在の日を取得
-	 */
-	public function getDay()
-	{
-		return $this->now->format('d');
-	}
-
-	public function getToday()
-	{
-		if (isset($_GET['date'])) {
-			$date = $_GET['date'];
-			return $date;
-		} else {
-			return $this->now->format('Y-m-d');
-		}
-	}
-
 	public function getWeeks()
 	{
 		$weeks = [];
@@ -88,7 +58,8 @@ class CalendarView
 		return $weeks;
 	}
 
-	protected function getWeek(Carbon $date, $index = 0) {
+	protected function getWeek(Carbon $date, $index = 0)
+	{
 		return new CalendarWeek($date, $index);
 	}
 
@@ -97,13 +68,14 @@ class CalendarView
 	 */
 	public function render()
 	{
+
 		$setting = new Setting();
 		$setting->loadHoliday($this->now->format('Y'));
 
-		$this->setPriceDays = $setting->getSettingPrice($this->now->format("Ym"));
+		$this->setPriceDays = $setting->getSettingPrice($this->now->format("Y-m"));
 
 		$html = [];
-		$html[] = '<div class="calendar">';
+		$html[] = '<div class="calendar-box">';
 		$html[] = '<table class="table">';
 		$html[] = '<thead>';
 		$html[] = '<tr>';
@@ -142,6 +114,7 @@ class CalendarView
 		$html = [];
 		$html[] = '<td class="' . $day->getClassName() . '">';
 		$html[] = $day->render();
+		$html[] = '</div>';
 		$html[] = '</td>';
 		return implode("", $html);
 	}
@@ -161,6 +134,5 @@ class CalendarView
 	{
 		return $this->now->copy()->addMonthsNoOverflow()->format('Y-m');
 	}
-
 
 }

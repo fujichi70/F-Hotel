@@ -26,13 +26,14 @@ class SettingController extends Controller
             "FLAG_B" => Setting::B_season,
             "FLAG_C" => Setting::C_season,
         ]);
+        return view("admin.calendar");
     }
 
     function update(Request $request)
     {
 
         $input = $request->get("season");
-        Setting::updatePrice(date('Ym'), $input);
+        Setting::updatePrice(date('Y-m'), $input);
 
         // return view('admin.calendar', [
         //     "calendar" => $calendar,

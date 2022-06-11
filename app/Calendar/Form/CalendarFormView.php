@@ -16,8 +16,8 @@ class CalendarFormView extends CalendarView {
 		$week = new CalendarWeekForm($date, $index);
 
 		//臨時営業日を設定する
-		$start = $date->copy()->startOfWeek()->format("Ymd");
-		$end = $date->copy()->endOfWeek()->format("Ymd");
+		$start = $date->copy()->startOfWeek()->format("Y-m-d");
+		$end = $date->copy()->endOfWeek()->format("Y-m-d");
 
 		$week->setPriceDays = $this->setPriceDays->filter(function ($value, $key) use ($start, $end) {
 			return $key >= $start && $key <= $end;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Calendar\CalendarReservationView;
 use App\Calendar\CalendarView;
 use App\Calendar\Funcs\CalendarGetMonth;
 use App\Calendar\Room\CalendarRoomView;
@@ -23,7 +24,7 @@ class ReserveController extends Controller
         $rooms = Room::get();
 
         $date = new CalendarGetMonth();
-        $calendar = new CalendarView($date->getMonth($request));
+        $calendar = new CalendarReservationView($date->getMonth($request));
 
         return view('reservation', [
             "calendar" => $calendar,
@@ -115,51 +116,6 @@ class ReserveController extends Controller
     public function show(Request $request)
     {
 
-        $day = $_POST["day"];
-
-        $reserves = Reserve_day::where('day', $day)->get();
-
-        if (!empty($reserves)) {
-            $year = substr($day, 0, 4);
-            $month = substr($day, 5, 2);
-            $date = substr($day, 8, 2);
-            $select_day = $year . "年" . $month . "月" . $date . "日";
-
-            $room_id = [
-                1 => 0,
-                2 => 0,
-                3 => 0,
-                4 => 0,
-                5 => 0,
-                6 => 0,
-            ];
-            foreach ($reserves as $reserve) {
-                $room_id[$reserve->room_id] += 1;
-            }
-
-            $full_room = array_keys($room_id, 10);
-
-            $space_rooms = Room::whereNotIn('room_id', $full_room)->get();
-        } else {
-            $space_rooms = Room::get();
-        }
-
-        $day = str_replace('-', '', $day);
-        $priceSettings = Setting::where('date_key', $day)->with('season')->get();
-
-        if (!empty($priceSettings)) {
-            $priceUp = 0;
-            foreach ($priceSettings as $priceSetting) {
-                $priceUp = $priceSetting->season->priceup;
-            }
-        }
-
-        return view('reservation.show', [
-            "select_day" => $select_day,
-            "space_rooms" => $space_rooms,
-            "priceUp" => $priceUp,
-            "day" => $day,
-        ]);
     }
 
     public function room(Request $request, $room_id)
@@ -196,11 +152,14 @@ class ReserveController extends Controller
     public function selectDate(Request $request)
     {
 
-        $day = $request->day;
-        
-        $reserves = Reserve_day::where('day', $day)->get();
+        if (!empty($request->day)) {
+            $day = $request->day;
+            $people = $request->people;
+            $stay = $request->stay;
 
-        $date = new CalendarGetMonth();
+            $reserves = Reserve_day::where('day', $day)->get();
+
+            $date = new CalendarGetMonth();
 
             if (!empty($reserves)) {
                 $year = substr($day, 0, 4);
@@ -222,9 +181,17 @@ class ReserveController extends Controller
 
                 $full_room = array_keys($room_id, 10);
 
-                $rooms = Room::whereNotIn('room_id', $full_room)->get();
+                if ($people == 2) {
+                    $rooms = Room::whereNotIn('room_id', $full_room)->where('people', $people)->get();
+                } else {
+                    $rooms = Room::whereNotIn('room_id', $full_room)->get();
+                }
             } else {
-                $rooms = Room::get();
+                if ($people == 2) {
+                    $rooms = Room::where('people', $people)->get();
+                } else {
+                    $rooms = Room::get();
+                }
             }
 
             $priceSettings = Setting::where('date_key', $day)->with('season')->get();
@@ -238,12 +205,14 @@ class ReserveController extends Controller
 
             return response()->json(
                 [
-                        "select_day" => $select_day,
-                        "rooms" => $rooms,
-                        "priceUp" => $priceUp,
-                        "day" => $day,
-                ]);
-
-
+                    "select_day" => $select_day,
+                    "rooms" => $rooms,
+                    "priceUp" => $priceUp,
+                    "day" => $day,
+                    "people" => $people,
+                    "stay" => $stay,
+                ]
+            );
+        }
     }
 }

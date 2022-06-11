@@ -19,12 +19,12 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', function() {
+Route::get('/', function () {
     return view('index');
 })->name('top');
 
 // 予約関連ルーティング
-Route::group(['prefix' => 'reservation'], function() {
+Route::group(['prefix' => 'reservation'], function () {
     Route::get('/', [ReserveController::class, 'index'])->name('reservation');
     Route::post('/', [ReserveController::class, 'selectDate']);
     // Route::post('show', [ReserveController::class, 'show'])->name('reservation.show');
@@ -36,16 +36,18 @@ Route::group(['prefix' => 'reservation'], function() {
 });
 
 // 管理者関連ルーティング
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/', function() {
+        return view('admin');
+        })->name('admin');
+    Route::get('calendar', [SettingController::class, 'index'])->name('admin.calendar');
+    // Route::post('calendar', [SettingController::class, 'index']);
+    Route::post('setting', [SettingController::class, 'update'])->name('admin.update');
+});
 
-Route::get('admin.calendar', [SettingController::class, 'index'])->middleware(['auth'])->name('admin.calendar');
-Route::post('admin.calendar', [SettingController::class, 'index'])->middleware(['auth']);
-Route::post('admin.setting', [SettingController::class, 'update'])->middleware(['auth'])->name('admin.update');
 
 Route::get('user', function () {
     return view('user');
 })->name('user');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

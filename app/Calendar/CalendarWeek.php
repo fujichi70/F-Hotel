@@ -2,6 +2,7 @@
 
 namespace App\Calendar;
 
+use App\Models\Reserve_day;
 use App\Models\Setting;
 use Carbon\Carbon;
 
@@ -67,4 +68,6 @@ class CalendarWeek
 		$day->checkHoliday($setting);
 		return $day;
 	}
+
+
 }

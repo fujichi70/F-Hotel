@@ -1419,11 +1419,38 @@ a {
   vertical-align: middle;
 }
 
+.reservation-main--title {
+  font-size: 19px;
+  text-align: center;
+  margin: 30px 0;
+}
+
 .search-bar {
+  margin: 0 auto;
+  background-color: #fff;
   display: flex;
+  justify-content: space-around;
+  max-width: 800px;
+}
+
+.search-input--box {
+  display: flex;
+  flex-direction: column;
+  padding: 25px 0;
+  margin: 0 auto;
+}
+.search-input--box .search-input--items {
+  margin: 10px 0;
+}
+.search-input--box .search-input {
+  margin-left: 10px;
+  padding: 5px 5px;
+  width: 150px;
 }
 
 .calendar {
+  text-align: center;
+  margin: 0 auto;
   background-color: #fff;
   padding: 20px;
 }
@@ -1439,14 +1466,8 @@ a {
   cursor: pointer;
   font-size: 15px;
 }
-.calendar .calendar-header .btn-left {
-  margin-right: 10px;
-}
 .calendar .calendar-header .btn-left:hover {
   transform: scale(1.08);
-}
-.calendar .calendar-header .btn-right {
-  margin-left: 10px;
 }
 .calendar .calendar-header .btn-right:hover {
   transform: scale(1.08);
@@ -1454,14 +1475,18 @@ a {
 .calendar .calendar-header .arrow {
   color: rgb(0, 75, 50);
 }
+.calendar .calendar-box {
+  margin: 10px auto;
+}
 .calendar table {
   margin: 0 auto;
+  text-align: center;
 }
 .calendar thead tr th {
   background-color: rgb(0, 75, 50);
   color: #fff;
   border: 1px solid #c5c5c5;
-  width: 30px;
+  width: 50px;
 }
 .calendar thead tr .sat {
   background-color: rgb(7, 88, 159);
@@ -1473,19 +1498,32 @@ a {
   text-align: right;
 }
 .calendar tbody tr td {
+  cursor: pointer;
   border: 1px solid #c5c5c5;
-  width: 30px;
-  padding-right: 3px;
+  width: 50px;
+  height: 50px;
+}
+.calendar tbody tr td .calendar-room {
+  text-align: center;
 }
 .calendar tbody tr td:hover {
   background-color: rgb(0, 75, 50);
   transform: scale(1.1);
 }
-.calendar tbody tr td:hover a {
+.calendar tbody tr td:hover .day {
+  color: #fff;
+}
+.calendar tbody tr td:hover .calendar-room {
   color: #fff;
 }
 .calendar tbody tr td .room-full {
   text-align: center;
+}
+.calendar tbody tr .day {
+  padding-right: 3px;
+}
+.calendar tbody tr .select {
+  background-color: antiquewhite;
 }
 .calendar tbody tr .day-blank {
   visibility: hidden;
@@ -1549,12 +1587,6 @@ a {
 }
 .calendar tbody tr .day:hover {
   color: #fff;
-}
-
-.reservation-title {
-  font-size: 19px;
-  text-align: center;
-  margin: 50px 0;
 }
 
 .reservation-form {
@@ -1717,6 +1749,7 @@ a {
 .reservation-room--item .room-flex dd {
   padding: 10px 0;
   display: inline-block;
+  text-align: left;
 }
 .reservation-room--item .room-flex .room-br {
   display: none;
@@ -1725,6 +1758,11 @@ a {
   margin: 30px 0;
 }
 
+@media screen and (max-width: 680px) {
+  .search-bar {
+    flex-direction: column;
+  }
+}
 @media screen and (max-width: 600px) {
   .reservation-room--item .reservation-room--name {
     font-size: 20px;
@@ -1739,6 +1777,9 @@ a {
     font-weight: 400;
     font-family: "Monotype Corsiva";
     font-style: italic;
+  }
+  .reservation-room--item .room-flex .room-br {
+    display: initial;
   }
 }
 #room-detail {

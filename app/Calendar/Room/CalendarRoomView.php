@@ -28,6 +28,7 @@ class CalendarRoomView extends CalendarView
 		$selectRoom = Room::where('room_id', $this->room_id)->with(['reserve_day' => function ($q) {
 			$q->where('day', 'like', $this->now->format("Y-m") . '%');
 		}])->get()->toArray();
+		
 		$price = Season::get();
 
 		$reserve_days = [];

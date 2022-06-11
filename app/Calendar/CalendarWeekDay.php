@@ -2,6 +2,7 @@
 
 namespace App\Calendar;
 
+use App\Models\Reserve_day;
 use App\Models\Setting;
 use Carbon\Carbon;
 
@@ -33,8 +34,7 @@ class CalendarWeekDay
 	 */
 	public function render()
 	{
-		// return '<a href="/reservation?date='. $this->now->format("Y-m-d") .'"><p class="day">' . $this->now->format("j") . '</p>';
-		return '<input class="day" type="button" value="'.$this->now->format("Y-m-d").'" name="day">' . $this->now->format("j");
+		return '<div class="day" data-day="' . $this->now->format("Y-m-d") . '"><div>' . $this->now->format("j") . '</div>';
 	}
 
 	/**
@@ -45,6 +45,7 @@ class CalendarWeekDay
 			$this->isHoliday = true;
 		}
 	}
+
 
 	function getDateKey()
 	{

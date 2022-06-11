@@ -21,12 +21,41 @@
     }
 }
 
+// 予約ページタイトル共通レイアウト
+.reservation-main--title {
+    font-size: 19px;
+    text-align: center;
+    margin: 30px 0;
+}
+
 .search-bar {
+    margin: 0 auto;
+    background-color: #fff;
     display: flex;
+    justify-content: space-around;
+    max-width: 800px;
+}
+
+// 人数・泊数
+.search-input--box {
+    display: flex;
+    flex-direction: column;
+    padding: 25px 0;
+    margin: 0 auto;
+    .search-input--items {
+        margin: 10px 0;
+    }
+        .search-input {
+            margin-left: 10px;
+            padding: 5px 5px;
+            width: 150px;
+        }
 }
 
 // カレンダー
 .calendar {
+    text-align: center;
+    margin: 0 auto;
     background-color: #fff;
     padding: 20px;
     .calendar-header {
@@ -43,13 +72,11 @@
             font-size: 15px;
         }
         .btn-left {
-            margin-right: 10px;
             &:hover {
                 transform: scale(1.08);
             }
         }
         .btn-right {
-            margin-left: 10px;
             &:hover {
                 transform: scale(1.08);
             }
@@ -58,17 +85,22 @@
             color: rgb(0, 75, 50);
         }
     }
+    .calendar-box {
+        margin: 10px auto;
+    }
 
     table {
         margin: 0 auto;
+        text-align: center;
     }
+
     thead {
         tr {
             th {
                 background-color: rgb(0, 75, 50);
                 color: #fff;
                 border: 1px solid #c5c5c5;
-                width: 30px;
+                width: 50px;
             }
             .sat {
                 background-color: rgb(7, 88, 159);
@@ -83,13 +115,21 @@
         text-align: right;
         tr {
             td {
+                cursor: pointer;
                 border: 1px solid #c5c5c5;
-                width: 30px;
-                padding-right: 3px;
+                width: 50px;
+                height: 50px;
+
+                .calendar-room {
+                    text-align: center;
+                }
                 &:hover {
                     background-color: rgb(0, 75, 50);
                     transform: scale(1.1);
-                    a {
+                    .day {
+                        color: #fff;
+                    }
+                    .calendar-room {
                         color: #fff;
                     }
                 }
@@ -98,6 +138,15 @@
                     text-align: center;
                 }
             }
+
+            .day {
+                padding-right: 3px;
+            }
+
+            .select {
+                background-color: antiquewhite;
+            }
+
             .day-blank {
                 visibility: hidden;
             }
@@ -170,14 +219,6 @@
     }
 }
 
-.search-day {
-}
-
-.reservation-title {
-    font-size: 19px;
-    text-align: center;
-    margin: 50px 0;
-}
 
 .reservation-form {
     font-size: 16px;
@@ -372,6 +413,7 @@
         dd {
             padding: 10px 0;
             display: inline-block;
+            text-align: left;
         }
 
         .room-br {
@@ -382,6 +424,12 @@
     .btn {
         margin: 30px 0;
     }
+}
+
+@media screen and (max-width: 680px) {
+.search-bar {
+    flex-direction: column;
+}
 }
 
 @media screen and (max-width: 600px) {
@@ -401,8 +449,14 @@
                 font-style: italic;
             }
         }
+        .room-flex {
+            .room-br {
+                display: initial;
+            }
+        }
     }
 }
+
 
 #room-detail {
     background-color: #fff;

@@ -10929,13 +10929,14 @@ var __webpack_exports__ = {};
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 // 日付選択時の非同期通信
 $(function () {
+  // カレンダー選択
   $(".day").on("click", function () {
+    $(".select").removeClass("select");
+    $(this).addClass("select");
     $(".reservation-room--box").empty();
-    var day = $(this).val();
-
-    if (!day) {
-      return false;
-    }
+    var day = $(this).data("day");
+    var people = $("#people").val();
+    var stay = $("#stay").val();
 
     function comma(num) {
       return String(num).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
@@ -10953,7 +10954,50 @@ $(function () {
       url: "/reservation",
       contentType: "application/json",
       data: JSON.stringify({
-        day: day
+        day: day,
+        people: people,
+        stay: stay
+      }),
+      dataType: "json"
+    }).done(function (data) {
+      var select_day = data.select_day;
+      var rooms = data.rooms;
+      var priceUp = data.priceUp;
+      var day = data.day;
+      $.each(rooms, function (index, room) {
+        html = "\n                    <div class=\"reservation-room--item\">\n                    \t<a href=\"reservation/room/".concat(room.room_id, "\">\n                    \t\t<h4 class=\"reservation-room--name\" data-en=\"").concat(topUppercase(room.name), "\">").concat(room.room_name, "\n                    \t\t</h4>\n                    \t\t<img src=\"/storage/images/").concat(room.img_path, "\" alt=\"").concat(room.name, "\">\n                    \t\t<dl class=\"room-flex\">\n                    \t\t\t<dt>\u30D9\u30C3\u30C9</dt>\n                    \t\t\t<dd>").concat(room.type, "</dd>\n                    \t\t</dl>\n                    \t\t<dl class=\"room-flex\">\n                    \t\t\t<dt>\u5B9A\u54E1\u4EBA\u6570</dt>\n                    \t\t\t<dd>").concat(room.people, "\u540D</dd>\n                    \t\t</dl>\n                    \t\t<dl class=\"room-flex\">\n                    \t\t\t<dt>\u304A\u98DF\u4E8B</dt>\n                    \t\t\t<dd>\u671D\u98DF\u30FB\u5915\u98DF2\u98DF<br class=\"room-br\">\uFF08\u30D3\u30E5\u30C3\u30D5\u30A7\uFF09</dd>\n                    \t\t</dl>\n                    \t\t<dl class=\"room-flex\">\n                    \t\t\t<dt>1\u540D\u69D8\u306E\u6599\u91D1<br class=\"room-br\">(\u7A0E\u8FBC)</dt>\n                    \t\t\t<dd>").concat(comma(parseInt(room.price) + parseInt(priceUp)), "\u5186<br class=\"room-br\">\uFF081\u540D\u69D8\u3067\u306E\u5BBF\u6CCA\u6642\uFF09</dd>\n                    \t\t</dl>\n                    \t</a>\n                    \t<button onclick=\"location.href='reservation/room/").concat(room.name, "'\"\n                    \t\tclass=\"btn\">\u3053\u306E\u90E8\u5C4B\u3092\u9078\u629E</button>\n                    </div>\n                    ");
+        $(".reservation-room--box").append(html);
+      });
+    }).fail(function () {
+      alert("ajax Error");
+    });
+  }); // 検索バー選択
+
+  $(".search").on("click", function () {
+    var year = $(".year").val();
+    var month = $(".month").val();
+    var date = $(".date").val();
+    $(".reservation-room--box").empty();
+
+    function comma(num) {
+      return String(num).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+    }
+
+    function topUppercase(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    }
+
+    $.ajax({
+      headers: {
+        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+      },
+      type: "POST",
+      url: "/reservation",
+      contentType: "application/json",
+      data: JSON.stringify({
+        year: year,
+        month: month,
+        date: date
       }),
       dataType: "json"
     }).done(function (data) {
