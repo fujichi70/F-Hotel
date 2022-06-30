@@ -21,9 +21,25 @@ class CalendarRoomView extends CalendarView
 	{
 
 		$html = [];
+		$reserve_days = [];
+		$pastDay = [];
 		$total = [];
 		$setPriceDay = null;
 		$setPrice = null;
+
+		$tmpDay = $this->now->copy();
+		$startDay = $tmpDay->copy()->startOfMonth()->toDateString();
+		$today = $tmpDay->toDateString();
+
+		for ($i = date('Ymd', strtotime($startDay)); $i < date('Ymd', strtotime($today)); $i++) {
+			$year = substr($i, 0, 4);
+			$month = substr($i, 4, 2);
+			$date = substr($i, 6, 2);
+
+			if (checkdate($month, $date, $year)) {
+				$pastDay[date('Y-m-d', strtotime($i))] = "";
+			}
+		}
 
 		$selectRoom = Room::where('room_id', $this->room_id)->with(['reserve_day' => function ($q) {
 			$q->where('day', 'like', $this->now->format("Y-m") . '%');
@@ -31,7 +47,6 @@ class CalendarRoomView extends CalendarView
 		
 		$price = Season::get();
 
-		$reserve_days = [];
 		$reserve_days =  $selectRoom[0]["reserve_day"];
 
 		$keys = array_values(array_unique(array_column($reserve_days, "day")));
@@ -62,14 +77,16 @@ class CalendarRoomView extends CalendarView
 			$setPrice = number_format($selectRoom[0]["price"]). "円";
 		}
 
-		if(isset($full_room[$day->getDateKey()])) {
+		if (isset($pastDay[$day->getDateKey()])) {
+			$setPrice = "×";
+		} elseif (isset($full_room[$day->getDateKey()])) {
 			$setPrice = "満室";
 		}
 		
 
 		$html[] = '<td class="' . $day->getClassName() . '">';
 		$html[] = $day->render();
-		if (isset($full_room[$day->getDateKey()])) {
+		if (isset($pastDay[$day->getDateKey()]) || isset($full_room[$day->getDateKey()])) {
 			$html[] = '<p class="room-full">' . $setPrice . '</p>';
 		} else {
 			$html[] = '<p class="room-price">' . $setPrice . '</p>';

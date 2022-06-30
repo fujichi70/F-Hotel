@@ -6,6 +6,7 @@ use App\Calendar\CalendarReservationView;
 use App\Calendar\CalendarView;
 use App\Calendar\Funcs\CalendarGetMonth;
 use App\Calendar\Room\CalendarRoomView;
+use App\Http\Requests\ReserveRequest;
 use App\Models\Reservation;
 use App\Models\Reserve_day;
 use App\Models\Room;
@@ -21,6 +22,10 @@ class ReserveController extends Controller
 {
     public function index(Request $request)
     {
+        $select_day = 0;
+        $people = 0;
+        $stay = 0;
+
         $rooms = Room::get();
 
         $date = new CalendarGetMonth();
@@ -32,36 +37,41 @@ class ReserveController extends Controller
         ]);
     }
 
-    public function confirm(Request $request)
+    public function confirm(ReserveRequest $request)
     {
+
+        $reservation = $request->validated();
+
         $reservation_id = 0;
         $reservation_id = "#" . str_pad(mt_rand(0, 999999), 6, 0, STR_PAD_LEFT);
-        $room_id = "01";
+        
+        $arrival = $reservation["arrival"];
+        $tmpStay = '+' . $reservation['stay'] . ' day';
+        $departure = date("Y-m-d", strtotime($tmpStay, strtotime($arrival)));
 
-        $reservation = [
-            'reservation_id' => $reservation_id,
-            'room_id' => $room_id,
-            // 'room_id' => $request->room_id,
-            'lastname' => $request->lastname,
-            'firstname' => $request->firstname,
-            'email' => $request->email,
-            'address' => $request->address,
-            'tel' => $request->tel,
-            'people' => $request->people,
-            'men' => $request->men,
-            'women' => $request->women,
-            'arrival' => $request->arrival,
-            'departure' => $request->departure,
-            'checkin_time' => $request->checkin_time,
-        ];
+        $arrivalDisplay = date("Y年m月d日", strtotime($arrival));
+        $departureDisplay = date("Y年m月d日", strtotime($departure));
+        
+        $arrivalDate = date("w", strtotime($arrival));
+        $departureDate = date("w", strtotime($departure));
+        $week_name = ["日", "月", "火", "水", "木", "金", "土"];
+
+        $arrivalDisplay = date($arrivalDisplay . "($week_name[$arrivalDate])");
+        $departureDisplay = date($departureDisplay . "($week_name[$departureDate])");
+
 
         return view('reservation.confirm', [
-            "reservation" => $reservation
+            "reservation" => $reservation,
+            "arrivalDisplay" => $arrivalDisplay,
+            "departureDisplay" => $departureDisplay,
+            "departure" => $departure,
+            "reservation_id" => $reservation_id
         ]);
     }
 
     public function store(Request $request)
     {
+
 
         try {
             DB::transaction(function () use ($request) {
@@ -79,6 +89,7 @@ class ReserveController extends Controller
                     'arrival' => $request->arrival,
                     'departure' => $request->departure,
                     'checkin_time' => $request->checkin_time,
+                    'totalprice' => $request->totalprice,
                 ]);
             });
         } catch (Throwable $e) {
@@ -107,45 +118,117 @@ class ReserveController extends Controller
             ]);
         }
 
-
         $request->session()->regenerateToken();
 
         return view('reservation.complete', ['message' => '予約が完了しました。', 'reservation_id' => $request->reservation_id]);
     }
 
-    public function show(Request $request)
+    public function selectRoom(Request $request, $room_id)
     {
 
-    }
+        $select_day = 0;
+        $totalPrice = 0;
+        $people = $request->people;
+        $stay = $request->stay;
 
-    public function room(Request $request, $room_id)
-    {
         $date = new CalendarGetMonth();
-
+        $today = $date->now->format("Y-m-d");
+        
         $selectRoom = Room::where('room_id', $room_id)->with('reserve_day')->get();
-        $reserves = Reserve_day::where('room_id', $room_id)->get();
-
+        
         $calendar = new CalendarRoomView($date->getMonth($request), $room_id);
 
-        return view('reservation.room', [
-            "selectRoom" => $selectRoom,
-            "calendar" => $calendar,
-        ]);
-    }
+        // 日付選択の上部屋選択した場合
+        if (!empty($request->select_day)) {
+            $select_day = $request->select_day;
 
-    public function selectDayRoom(Request $request, $room_id)
-    {
-        $date = new CalendarGetMonth();
+            $tmpDay = $select_day;
 
-        $selectRoom = Room::where('room_id', $room_id)->get();
-        $reserves = Reserve_day::where('room_id', $room_id)->get();
+            // 泊数が２泊以上の場合
+            if ($stay != 1) {
+                $tmpStay = '+' . $stay . ' day';
+                $stayDuration = date("Y-m-d", strtotime($tmpStay, strtotime($tmpDay)));
 
-        $calendar = new CalendarRoomView($date->getMonth($request), $room_id);
+                // 宿泊期間を取得
+                for ($i = date('Ymd', strtotime($tmpDay)); $i < date('Ymd', strtotime($stayDuration)); $i++) {
+                    $year = substr($i, 0, 4);
+                    $month = substr($i, 4, 2);
+                    $date = substr($i, 6, 2);
 
-        return view('reservation.room', [
-            "selectRoom" => $selectRoom,
-            "calendar" => $calendar,
-        ]);
+                    if (checkdate($month, $date, $year))
+                        $stayDays[] = date('Y-m-d', strtotime($i));
+                }
+
+                $price = 0;
+                $priceSettings = [];
+                $priceUp = 0;
+
+                // 宿泊期間で予約があるか確認
+                foreach ($stayDays as $stayDay) {
+                    $price += $selectRoom[0]->price;
+                    $priceSettings[] = Setting::where('date_key', $stayDay)->with('season')->get();
+                }
+
+                foreach ($priceSettings as $priceSetting) {
+                    foreach ($priceSetting as $p) {
+                        if (!empty($p->season)) {
+                            $priceUp = $p->season->priceup;
+                        }
+                    }
+                }
+
+                $totalPrice = ($price + $priceUp) * $people;
+
+                // 1名で2人部屋宿泊の場合は金額2名分にする
+                if ($people == 1 && ($room_id == 2 || $room_id == 4 || $room_id == 5 || $room_id == 6)) {
+                    $totalPrice *= 2;
+                }
+            } else {
+                // 1泊の場合はその日の予約があるか確認
+                $priceSetting = Setting::where('date_key', $select_day)->with('season')->get();
+
+                if (!empty($priceSetting[0]->season)) {
+                    $totalPrice = ($selectRoom[0]->price + $priceSetting[0]->season->priceup) * $people;
+                } else {
+                    $totalPrice = $selectRoom[0]->price * $people;
+                }
+
+                // 1名で2人部屋宿泊の場合は金額2名分にする
+                if ($people == 1 && ($room_id == 2 || $room_id == 4 || $room_id == 5 || $room_id == 6)) {
+                    $totalPrice *= 2;
+                }
+            }
+
+            // 日付選択せず部屋選択した場合
+        } else {
+            $date = new CalendarGetMonth();
+
+            $selectRoom = Room::where('room_id', $room_id)->with('reserve_day')->get();
+
+            $calendar = new CalendarRoomView($date->getMonth($request), $room_id);
+        }
+
+        if ($request->ajax()) {
+
+            return
+                response()->json(
+                    [
+                        "totalPrice" => $totalPrice,
+                    ]
+                );
+
+        } else {
+
+            return view('reservation.room', [
+                "today" => $today,
+                "selectRoom" => $selectRoom,
+                "calendar" => $calendar,
+                "select_day" => $select_day,
+                "people" => $people,
+                "stay" => $stay,
+                "totalPrice" => $totalPrice,
+            ]);
+        }
     }
 
 
@@ -157,15 +240,35 @@ class ReserveController extends Controller
             $people = $request->people;
             $stay = $request->stay;
 
-            $reserves = Reserve_day::where('day', $day)->get();
+            $tmpDay = $day;
 
-            $date = new CalendarGetMonth();
+            // 泊数が２泊以上の場合
+            if ($stay != 1) {
+                $tmpStay = '+' . $stay . ' day';
+                $stayDuration = date("Y-m-d", strtotime($tmpStay, strtotime($tmpDay)));
 
-            if (!empty($reserves)) {
-                $year = substr($day, 0, 4);
-                $month = substr($day, 5, 2);
-                $date = substr($day, 8, 2);
-                $select_day = $year . "年" . $month . "月" . $date . "日";
+                // 宿泊期間を取得
+                for ($i = date('Ymd', strtotime($tmpDay)); $i < date('Ymd', strtotime($stayDuration)); $i++) {
+                    $year = substr($i, 0, 4);
+                    $month = substr($i, 4, 2);
+                    $date = substr($i, 6, 2);
+
+                    if (checkdate($month, $date, $year))
+                        $stayDays[] = date('Y-m-d', strtotime($i));
+                }
+
+                $reservesDays = [];
+                // 宿泊期間で予約があるか確認
+                foreach ($stayDays as $stayDay) {
+                    $reservesDays[$stayDay] = Reserve_day::where("day", $stayDay)->get();
+                }
+            } else {
+                // 1泊の場合はその日の予約があるか確認
+                $reservesDay = Reserve_day::where('day', $tmpDay)->get();
+            }
+
+            // 予約があったら残部屋があるか確認
+            if (!empty($reservesDays) || !empty($reservesDay)) {
 
                 $room_id = [
                     1 => 0,
@@ -175,18 +278,36 @@ class ReserveController extends Controller
                     5 => 0,
                     6 => 0,
                 ];
-                foreach ($reserves as $reserve) {
-                    $room_id[$reserve->room_id] += 1;
+
+                // 2泊以上の場合
+                if (!empty($reservesDays)) {
+                    foreach ($reservesDays as $reserveDays) {
+                        foreach ($reserveDays as $reserveDay) {
+                            $room_id[$reserveDay->room_id] += 1;
+                        }
+                    }
+                    // 1泊の場合
+                } elseif (!empty($reservesDay)) {
+
+                    foreach ($reservesDay as $reserveDay) {
+                        $room_id[$reserveDay->room_id] += 1;
+                    }
                 }
 
-                $full_room = array_keys($room_id, 10);
+                $full_room = array_filter($room_id, function ($e) {
+                    return $e >= 10;
+                });
 
+                $full_room = array_keys($full_room);
+
+                // 満室を除外 ※宿泊人数が2人の場合1人部屋は候補に出さない
                 if ($people == 2) {
                     $rooms = Room::whereNotIn('room_id', $full_room)->where('people', $people)->get();
                 } else {
                     $rooms = Room::whereNotIn('room_id', $full_room)->get();
                 }
             } else {
+                // 宿泊期間の予約がなかったらそのまま部屋取得 ※宿泊人数が2人の場合1人部屋は候補に出さない
                 if ($people == 2) {
                     $rooms = Room::where('people', $people)->get();
                 } else {
@@ -194,6 +315,7 @@ class ReserveController extends Controller
                 }
             }
 
+            // 宿泊日が価格設定されているか取得 ※表示用
             $priceSettings = Setting::where('date_key', $day)->with('season')->get();
 
             if (!empty($priceSettings)) {
@@ -205,12 +327,8 @@ class ReserveController extends Controller
 
             return response()->json(
                 [
-                    "select_day" => $select_day,
                     "rooms" => $rooms,
                     "priceUp" => $priceUp,
-                    "day" => $day,
-                    "people" => $people,
-                    "stay" => $stay,
                 ]
             );
         }

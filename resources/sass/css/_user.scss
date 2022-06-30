@@ -50,12 +50,11 @@
         &::after {
             animation: arrowAnime02 1s both infinite;
         }
-
     }
-	
 
     @keyframes arrowAnime01 {
-        0%,100% {
+        0%,
+        100% {
             transform: translateY(-50%) rotate(30deg);
         }
 
@@ -65,12 +64,13 @@
     }
 
     @keyframes arrowAnime02 {
-        0%, 100% {
-        transform: translateY(-50%) rotate(-30deg);
+        0%,
+        100% {
+            transform: translateY(-50%) rotate(-30deg);
         }
 
         50% {
-        transform: translate(5px, -50%) rotate(-30deg);
+            transform: translate(5px, -50%) rotate(-30deg);
         }
     }
 }
@@ -99,5 +99,13 @@
             transform: translate(50%, -50%);
             margin: 20px;
         }
+    }
+}
+
+#checkreserves {
+    table {
+        text-align: center;
+        border-collapse: collapse;
+        border-spacing: 0;
     }
 }

@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('arrival');
             $table->string('departure');
             $table->string('checkin_time');
+            $table->string('totalprice');
             $table->timestamps();
         });
     }

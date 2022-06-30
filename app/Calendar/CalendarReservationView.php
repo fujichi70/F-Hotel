@@ -34,7 +34,7 @@ class CalendarReservationView extends CalendarView
 		}
 
 		if ($pastDay < $this->now) {
-			return '<p class="calendar-room">×</p>';
+			return '<p class="calendar-room no-select">×</p>';
 		}
 
 		$checkRoom = Reserve_day::where('day', $day)->get()->toArray();
@@ -59,7 +59,7 @@ class CalendarReservationView extends CalendarView
 		if (!empty($emptyRoom)) {
 			return '<p class="calendar-room">◯</p>';
 		} else {
-			return '<p class="calendar-room">×</p>';
+			return '<p class="calendar-room no-select">×</p>';
 		}
 	}
 }

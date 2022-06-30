@@ -10921,72 +10921,124 @@ return jQuery;
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-"use strict";
 /*!******************************!*\
   !*** ./resources/js/main.js ***!
   \******************************/
 /* provided dependency */ var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+$(function () {
+  var windowHeight;
+  var scroll;
+  var targetPosition; // ハンバーガーメニュー
 
+  $(".hamburger").on("click", function () {
+    $(this).toggleClass("active");
 
-{
-  window.addEventListener("DOMContentLoaded", function () {
-    // ハンバーガーメニュー
-    $(".hamburger").on("click", function () {
-      $(this).toggleClass("active");
+    if ($(this).hasClass("active")) {
+      $(".sp-menu--nav").addClass("active");
+    } else {
+      $(".sp-menu--nav").removeClass("active");
+    }
+  });
+  $(".news-btn").on("click", function () {
+    $(".news-parts--hidden").addClass("open");
+  }); // スクロールバー
 
-      if ($(this).hasClass("active")) {
-        $(".sp-menu--nav").addClass("active");
-      } else {
-        $(".sp-menu--nav").removeClass("active");
+  $(window).on("scroll", function () {
+    windowHeight = $(window).height();
+    scroll = $(window).scrollTop();
+    var scrollHeight = $(document).height();
+    var scrollPosition = windowHeight + scroll;
+    var footHeight = $("#footer").innerHeight();
+
+    if (scroll > 100) {
+      $(".scroll-arrow").hide();
+      $(".return-top").show();
+    } else {
+      $(".scroll-arrow").show();
+      $(".return-top").hide();
+    }
+  }); // セクション遷移
+
+  $(".main-menu--list").eq(0).on("click", function () {
+    $(window).scrollTop($("#room").position().top);
+  });
+  $(".main-menu--list").eq(1).on("click", function () {
+    $(window).scrollTop($("#restaurant").position().top);
+  });
+  $(".main-menu--list").eq(2).on("click", function () {
+    $(window).scrollTop($("#spa").position().top);
+  });
+  $(".main-menu--list").eq(3).on("click", function () {
+    $(window).scrollTop($("#service").position().top);
+  });
+  $(".main-menu--list").eq(4).on("click", function () {
+    $(window).scrollTop($("#access").position().top);
+  }); // トップに戻る
+
+  $(".return-top").on("click", function () {
+    $("body,html").animate({
+      scrollTop: 0
+    }, 400);
+    return false;
+  }); // フェードイン
+
+  $(window).on("scroll", function () {
+    $(".fade").each(function () {
+      windowHeight = $(window).height();
+      scroll = $(window).scrollTop();
+      targetPosition = $(this).offset().top;
+
+      if (scroll >= targetPosition - windowHeight) {
+        $(this).addClass("in");
       }
-    });
-    $(".news-btn").on("click", function () {
-      $(".news-parts--hidden").addClass("open");
     }); // ニュースフェードイン
 
-    $(window).on("scroll", function () {
-      $(".news-parts").each(function () {
-        var windowHeight = $(window).height();
-        var scroll = $(window).scrollTop();
-        var targetPosition = $(this).offset().top;
+    $(".news-parts").each(function () {
+      windowHeight = $(window).height();
+      scroll = $(window).scrollTop();
+      targetPosition = $(this).offset().top;
 
-        if (scroll >= targetPosition - windowHeight) {
-          $(this).addClass("appear");
-        }
-      });
-    });
-    $(window).on("scroll", function () {
-      $(".fade").each(function () {
-        var windowHeight = $(window).height();
-        var scroll = $(window).scrollTop();
-        var targetPosition = $(this).offset().top;
-
-        if (scroll >= targetPosition - windowHeight) {
-          $(this).addClass("in");
-        }
-      });
+      if (scroll >= targetPosition - windowHeight) {
+        $(this).addClass("appear");
+      }
     }); // 時間差フェードイン
 
-    $(window).on("scroll", function () {
-      $(".time-fade").each(function (i) {
-        var windowHeight = $(window).height();
-        var scroll = $(window).scrollTop();
-        var targetPosition = $(this).offset().top;
+    $(".time-fade").each(function (i) {
+      windowHeight = $(window).height();
+      scroll = $(window).scrollTop();
+      targetPosition = $(this).offset().top;
 
-        if (scroll >= targetPosition - windowHeight) {
-          var delay = 400;
-          $(this).delay(i * delay).queue(function () {
-            $(this).addClass("in");
-          });
-        }
-      });
-    }); // 満室時に選択できないよう親要素にhiddenクラス付与
+      if (scroll >= targetPosition - windowHeight) {
+        $(this).delay(i * 400).queue(function () {
+          $(this).addClass("in");
+        });
+      }
+    });
+  }); // newsクリックでテキスト表示
 
-    $("td:has(p.room-full)").addClass("hidden");
+  $(".news-parts").on('click', function () {
+    $(this).next().toggleClass("slidedown");
+  }); // 予約画面
+  // 満室時に選択できないよう親要素にhiddenクラス付与
+
+  $("td:has(p.room-full)").addClass("hidden");
+  $("div.day:has(p.room-full)").addClass("hidden"); // 予約できない日にhidden付与
+
+  $("td:has(.no-select)").addClass("hidden");
+  $("div.day:has(.no-select)").addClass("hidden"); // option[selected]によって「ソース上の」選択状態を取得。
+
+  var tmpSelect = $('select[name="stay"] option[selected]').val(); // option:selected （見かけ上の選択状態）を削除。
+
+  $('select[name="stay"] option:selected').removeAttr("selected"); // 改めて選択を設定しなおす。
+
+  $('select[name="stay"]').val(tmpSelect);
+  $(".price").on("change", function () {
+    var price = $(this).val();
+    $(".input-price").val(price);
   });
-}
+});
 })();
 
 /******/ })()

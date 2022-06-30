@@ -18,9 +18,9 @@
     <link href="{{ asset('css/style.css').'?'.time() }}" rel="stylesheet">
 
     <!-- Scripts -->
-    <script src="{{ mix('js/app.js') }}"></script>
-    <script src="{{ mix('js/swiper.js') }}"></script>
     <script src="{{ mix('js/main.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}" defer></script>
+    <script src="{{ mix('js/swiper.js') }}"></script>
 </head>
 
 <body>

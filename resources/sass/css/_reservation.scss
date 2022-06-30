@@ -21,11 +21,31 @@
     }
 }
 
+#reservation .contents {
+    .contents-title {
+        margin-bottom: 50px;
+    }
+}
+
 // 予約ページタイトル共通レイアウト
 .reservation-main--title {
     font-size: 19px;
     text-align: center;
     margin: 30px 0;
+}
+
+// ボタン（共通）
+.btn-box {
+    margin-top: 40px;
+    justify-content: center;
+    align-items: center;
+    .btn {
+        font-size: 16px;
+    }
+
+    .btn-back {
+        background: #707070;
+    }
 }
 
 .search-bar {
@@ -45,11 +65,11 @@
     .search-input--items {
         margin: 10px 0;
     }
-        .search-input {
-            margin-left: 10px;
-            padding: 5px 5px;
-            width: 150px;
-        }
+    .search-input {
+        margin-left: 10px;
+        padding: 5px 5px;
+        width: 150px;
+    }
 }
 
 // カレンダー
@@ -163,24 +183,6 @@
                     }
                 }
             }
-            .hidden {
-                user-select: none;
-                background-color: #fff;
-                color: #c5c5c5;
-                .day {
-                    color: rgb(0, 51, 35);
-                }
-
-                &:hover {
-                    background-color: #fff;
-                    transform: scale(1);
-                }
-                a {
-                    &:hover {
-                        color: #c5c5c5;
-                    }
-                }
-            }
 
             .day-sun {
                 background-color: rgb(235, 183, 183);
@@ -219,152 +221,11 @@
     }
 }
 
-
-.reservation-form {
-    font-size: 16px;
-    max-width: 600px;
-    margin: 0 auto 20px;
-    border: 1px solid rgb(0, 51, 35);
-    padding: 20px;
-    dl {
-        .name {
-            align-items: center;
-            dt {
-                margin-right: 10px;
-                margin-bottom: 10px;
-            }
-            dd {
-                margin-right: 20px;
-                margin-bottom: 10px;
-            }
-        }
-
-        dt {
-            margin-bottom: 3px;
-        }
-
-        dd {
-            margin-bottom: 15px;
-            max-width: 500px;
-
-            .input-area {
-                padding: 5px 10px;
-                border-radius: 5px;
-                border: 1px solid rgb(0, 51, 35);
-                width: 200px;
-            }
-            .input-name {
-                width: 100px;
-            }
-
-            .input-tel {
-                width: 400px;
-            }
-
-            .input-address {
-                width: 400px;
-            }
-
-            .radio {
-                display: none;
-
-                &:checked + .radio-text {
-                    background: rgb(0, 51, 35);
-                    color: #ffffff;
-                }
-                &:hover + .radio-text {
-                    transform: scale(1.1);
-                }
-            }
-
-            .radio-text {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin: 5px;
-                width: 60px;
-                height: 30px;
-                padding-left: 5px;
-                padding-right: 5px;
-                text-align: center;
-                cursor: pointer;
-                border: 2px solid rgb(0, 51, 35);
-                border-radius: 5px;
-            }
-        }
-    }
-    .btn {
-        margin: 0 auto;
-    }
-    .error {
-        font-family: sans-serif;
-        font-weight: bold;
-        font-size: 13px;
-        color: rgb(214, 0, 0);
-        padding-bottom: 10px;
-    }
-}
-
-@media screen and (max-width: 959px) {
-    .reservation-form {
-        dl {
-            dt {
-            }
-
-            dd {
-                .radio {
-                }
-
-                .radio-text {
-                    width: 80px;
-                    height: 40px;
-                    padding-left: 5px;
-                    padding-right: 5px;
-                    text-align: center;
-                    cursor: pointer;
-                    border: 2px solid rgb(0, 51, 35);
-                    border-radius: 5px;
-                }
-
-                select {
-                    padding: 5px 10px;
-                    border-radius: 5px;
-                }
-
-                .input-arrival {
-                    display: block;
-                    .input-area {
-                        display: block;
-                        margin-bottom: 20px;
-                    }
-                }
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 450px) {
-    .reservation-form {
-        dl {
-            dd {
-                .input-address {
-                    width: 310px;
-                }
-            }
-        }
-    }
-}
-
 // 部屋部分（詳細ページでも引用）
 .reservation-room {
     max-width: 600px;
     margin: 0 auto;
     text-align: center;
-}
-
-.reservation-room--title {
-    text-align: center;
-    font-size: 20px;
 }
 
 .reservation-room--box {
@@ -376,6 +237,11 @@
 .reservation-room--item {
     padding-bottom: 30px;
     border-bottom: 1px solid #c5c5c5;
+
+    .reservation-room--select {
+        cursor: pointer;
+    }
+
     .reservation-room--name {
         font-size: 20px;
         margin-bottom: 5px;
@@ -403,6 +269,7 @@
         display: flex;
         align-items: center;
         dt {
+            font-size: 16px;
             padding: 10px 0;
             text-align: center;
             min-width: 160px;
@@ -411,6 +278,7 @@
         }
 
         dd {
+            font-size: 16px;
             padding: 10px 0;
             display: inline-block;
             text-align: left;
@@ -427,9 +295,9 @@
 }
 
 @media screen and (max-width: 680px) {
-.search-bar {
-    flex-direction: column;
-}
+    .search-bar {
+        flex-direction: column;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -457,11 +325,152 @@
     }
 }
 
-
 #room-detail {
     background-color: #fff;
+    padding-top: 30px;
     text-align: center;
 
+    // 予約フォーム
+    .reservation-form {
+        font-size: 16px;
+        max-width: 600px;
+        margin: 0 auto 20px;
+        border: 1px solid rgb(0, 51, 35);
+        padding: 20px;
+
+        tr {
+            border-bottom: 1px solid rgba(0, 51, 35, 0.356);
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+
+            th {
+                min-width: 130px;
+                text-align: left;
+                margin: 20px 0;
+            }
+
+            td {
+                margin-left: 10px;
+                margin: 20px 0;
+
+                .input-area {
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                    border: 1px solid rgb(0, 51, 35);
+                }
+                .input-name {
+                    width: 100px;
+                }
+
+                .input-email,
+                .input-tel,
+                .input-address {
+                    width: 400px;
+                }
+
+                .input-checkin {
+                    border-radius: 5px;
+                    padding: 5px;
+                }
+
+                .radio {
+                    display: none;
+
+                    &:checked + .radio-text {
+                        background: rgb(0, 51, 35);
+                        color: #ffffff;
+                    }
+                    &:hover + .radio-text {
+                        transform: scale(1.1);
+                    }
+                }
+
+                .radio-text {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 5px;
+                    width: 60px;
+                    height: 30px;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    text-align: center;
+                    cursor: pointer;
+                    border: 2px solid rgb(0, 51, 35);
+                    border-radius: 5px;
+                }
+            }
+        }
+
+        .name {
+            align-items: center;
+
+            th {
+                min-width: 30px;
+            }
+
+            td {
+                margin-right: 50px;
+            }
+        }
+
+        .error {
+            margin: 0;
+            border: none;
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 13px;
+            color: rgb(214, 0, 0);
+            padding-bottom: 10px;
+        }
+    }
+
+    @media screen and (max-width: 959px) {
+        .reservation-form {
+            dl {
+                dd {
+                    .radio-text {
+                        width: 80px;
+                        height: 40px;
+                        padding-left: 5px;
+                        padding-right: 5px;
+                        text-align: center;
+                        cursor: pointer;
+                        border: 2px solid rgb(0, 51, 35);
+                        border-radius: 5px;
+                    }
+
+                    select {
+                        padding: 5px 10px;
+                        border-radius: 5px;
+                    }
+
+                    .input-arrival {
+                        display: block;
+                        .input-area {
+                            display: block;
+                            margin-bottom: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 450px) {
+        .reservation-form {
+            dl {
+                dd {
+                    .input-address {
+                        width: 310px;
+                    }
+                }
+            }
+        }
+    }
+
+    // 部屋
     .reservation-room--item {
         border-bottom: none;
         padding: 50px 0;
@@ -495,6 +504,24 @@
     }
 }
 
+// 満室or過去の日付にhiddenクラスを付与
+.hidden {
+    cursor: none !important;
+    user-select: none !important;
+    background-color: #fff !important;
+    color: #c5c5c5 !important;
+
+    &:hover {
+        background-color: #fff !important;
+        transform: scale(1) !important;
+    }
+    a {
+        &:hover {
+            color: #c5c5c5 !important;
+        }
+    }
+}
+
 #reservation-confirm {
     .wrapper {
         margin: 0 20px;
@@ -511,7 +538,8 @@
 
             .confirm-flex {
                 display: flex;
-                margin-bottom: 10px;
+                margin-bottom: 20px;
+                align-items: center;
 
                 p {
                     &:first-child {
@@ -519,18 +547,27 @@
                     }
                 }
                 span {
-                    margin-left: 10px;
+                    margin-left: 20px;
                 }
             }
-            .btn-box {
-                margin-top: 20px;
-                justify-content: center;
-                align-items: center;
-                .btn {
-                    margin: 0 auto;
+
+            .confirm-stay {
+                .confirm-arrival,
+                .confirm-departure {
+                    font-size: 18px;
+                    margin-left: 0;
+                    font-weight: bold;
                 }
-                .btn-back {
-                    background: #707070;
+            }
+
+            .confirm-price {
+                margin-bottom: 30px;
+                padding-bottom: 10px;
+                border-bottom: 1px solid rgb(0, 51, 35);
+                .confirm-totalprice {
+                    font-size: 18px;
+                    margin-left: 0;
+                    font-weight: bold;
                 }
             }
         }
@@ -568,7 +605,7 @@
         box-shadow: 3px 3px 1px gray;
         border-radius: 10px;
         max-width: 700px;
-        margin: 0 auto;
+        margin: 0 auto 20px;
         padding: 50px;
         text-align: center;
 
@@ -586,10 +623,8 @@
 
         .complete-message {
             font-size: 16px;
+            margin-bottom: 30px;
         }
 
-        .btn {
-            margin: 50px;
-        }
     }
 }

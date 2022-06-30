@@ -1,29 +1,3 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-    <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Zen+Old+Mincho&display=swap" rel="stylesheet">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/style.css').'?'.time() }}" rel="stylesheet">
-
-    <!-- Scripts -->
-    <script src="{{ mix('js/app.js') }}"></script>
-    <script src="{{ mix('js/swiper.js') }}"></script>
-    <script src="{{ mix('js/main.js') }}"></script>
-</head>
-
-<body>
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -39,9 +13,12 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
                         管理者画面
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.checkreserves')" :active="request()->routeIs('admin.checkreserves')">
+                        宿泊予約確認
                     </x-nav-link>
                     <x-nav-link :href="route('admin.calendar')" :active="request()->routeIs('admin.calendar')">
                         お部屋の価格設定
@@ -101,9 +78,11 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <p>メニュー一覧</p>
             <x-responsive-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.index')">
                 トップ
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.checkreserves')" :active="request()->routeIs('admin.checkreserves')">
+                宿泊予約確認
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.calendar')" :active="request()->routeIs('admin.calendar')">
                 お部屋の価格設定
@@ -131,10 +110,3 @@
         </div>
     </div>
 </nav>
-
-<!-- Page Content -->
-@yield('content')
-
-</body>
-
-</html>

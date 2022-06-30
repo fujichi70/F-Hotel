@@ -23,6 +23,13 @@ class Reservation extends Model
         'arrival',
         'departure',
         'checkin_time',
+        'totalprice',
     ];
+
+    public function Room()
+    {
+        return $this->belongsTo(Room::class, 'room_id', 'room_id');
+    }
+
 
 }

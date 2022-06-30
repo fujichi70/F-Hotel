@@ -32,7 +32,6 @@ class PeopleSum implements Rule
     public function passes($attribute, $value)
     {
         return $this->people == $this->men + $this->women; 
-        //
     }
 
     /**

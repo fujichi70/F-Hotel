@@ -1,0 +1,272 @@
+.user-title {
+    text-align: center;
+    font-size: 20px;
+    color: rgb(0, 75, 50);
+    margin: 30px 0;
+}
+
+.calendar {
+    text-align: center;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+}
+
+.calendar .calendar-header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: baseline;
+    -ms-flex-align: baseline;
+    align-items: baseline;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+}
+
+.calendar .calendar-header .calendar-title {
+    font-size: 20px;
+}
+
+.calendar .calendar-header .calendar-btn {
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.calendar .calendar-header .btn-left:hover {
+    -webkit-transform: scale(1.08);
+    transform: scale(1.08);
+}
+
+.calendar .calendar-header .btn-right:hover {
+    -webkit-transform: scale(1.08);
+    transform: scale(1.08);
+}
+
+.calendar .calendar-header .arrow {
+    color: #004b32;
+}
+
+.calendar .calendar-box {
+    margin: 10px auto;
+}
+
+.calendar table {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.calendar-body {
+    margin-bottom: 20px;
+}
+
+.calendar thead tr th {
+    background-color: #004b32;
+    color: #fff;
+    border: 1px solid #c5c5c5;
+    width: 50px;
+}
+
+.calendar thead tr .sat {
+    background-color: #07589f;
+}
+
+.calendar thead tr .sun {
+    background-color: #9f0707;
+}
+
+.calendar tbody {
+    text-align: right;
+}
+
+.calendar tbody tr td {
+    cursor: pointer;
+    border: 1px solid #c5c5c5;
+    width: 50px;
+    height: 50px;
+}
+
+.calendar tbody tr td .calendar-room {
+    text-align: center;
+}
+
+.calendar tbody tr td:hover {
+    background-color: #004b32;
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.calendar tbody tr td:hover .day {
+    color: #fff;
+}
+
+.calendar tbody tr td:hover .calendar-room {
+    color: #fff;
+}
+
+.calendar tbody tr td .room-full {
+    text-align: center;
+}
+
+.calendar tbody tr .day {
+    padding-right: 3px;
+}
+
+.calendar tbody tr .select {
+    background-color: antiquewhite;
+}
+
+.calendar tbody tr .day-blank {
+    visibility: hidden;
+}
+
+.calendar tbody tr .day-sat {
+    background-color: #b7dfeb;
+}
+
+.calendar tbody tr .day-sat:hover {
+    background-color: #07589f;
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.calendar tbody tr .day-sat a {
+    color: #07589f;
+}
+
+.calendar tbody tr .day-sat a:hover {
+    color: #b7dfeb;
+}
+
+.calendar tbody tr .day-sun {
+    background-color: #ebb7b7;
+}
+
+.calendar tbody tr .day-sun:hover {
+    background-color: #9f0707;
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.calendar tbody tr .day-sun a {
+    color: #9f0707;
+}
+
+.calendar tbody tr .day-sun a:hover {
+    color: #ebb7b7;
+}
+
+.calendar tbody tr .day-holiday {
+    background-color: #ebb7b7;
+}
+
+.calendar tbody tr .day-holiday:hover {
+    background-color: #9f0707;
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.calendar tbody tr .day-holiday a {
+    color: #9f0707;
+}
+
+.calendar tbody tr .day-holiday a:hover {
+    color: #ebb7b7;
+}
+
+.calendar tbody tr .day:hover {
+    color: #fff;
+}
+
+.btn {
+    background-color: rgb(0, 75, 50);
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: white;
+    border: 2px solid rgb(0, 75, 50);
+    color: rgb(0, 75, 50);
+}
+
+/* 価格設定、業務連絡、自分メモのアラート */
+.alert {
+    margin-left: 30px;
+    padding: 10px 0;
+    font-size: 18px;
+    transform: translateX(-100%);
+    -webkit-animation: fadeinAlert 3s;
+    animation: fadeinAlert 3s;
+}
+
+@-webkit-keyframes fadeinAlert {
+    0% {
+        transform: translateX(-100%);
+    }
+    10%,
+    90% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes fadeinAlert {
+    0% {
+        transform: translateX(-100%);
+    }
+    10%,
+    90% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.sp-style {
+    display: none;
+}
+.pc-style {
+    display: initial;
+}
+
+@media screen and (max-width: 900px) {
+    .sp-style {
+        display: initial;
+    }
+    .pc-style {
+        display: none;
+    }
+}
+
+
+@media screen and (max-width: 1200px) {
+    .calendar {
+        max-width: 1200px;
+    }
+
+    .calendar .table {
+        max-width: 1200px;
+    }
+
+    .calendar tbody tr td select {
+        max-width: 120px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .calendar tbody tr td select {
+        max-width: 80px;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .calendar tbody tr td select {
+        max-width: 50px;
+    }
+}

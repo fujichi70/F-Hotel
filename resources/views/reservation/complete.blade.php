@@ -19,7 +19,7 @@
 			<p class="reservation_error">エラーが発生しました。恐れ入りますが最初からご予約手続きをお願いいたします。</p>
 			@endif
 
-			<a href="{{ route('reservation') }}" class="btn btn-back">戻る</a>
+			<a href="{{ route('reservation') }}" class="btn">戻る</a>
 		</div>
 	</p>
 </section>

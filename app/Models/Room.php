@@ -13,6 +13,11 @@ class Room extends Model
     {
         return $this->hasMany(Reserve_day::class, 'room_id', 'room_id');
     }
+
+    public function Reservation()
+    {
+        return $this->hasMany(Reservation::class, 'room_id', 'room_id');
+    }
 }
 
 
