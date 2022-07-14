@@ -7,7 +7,6 @@
 		<div class="contents">
 			<h2 class="contents-title">reservation<span class="sub-title">- 宿泊ご予約 -</span></h2>
 		</div>
-
 		
 		@foreach ($selectRoom as $room)
 		<h3 class="reservation-main--title">ご予約情報ご入力</h3>
@@ -31,7 +30,7 @@
 				<tr>
 					<th>泊数</th>
 					<td>
-						<select id="stay" name="stay" class="input-area">
+						<select id="reserveStay" name="stay" class="input-area">
 							<option class="input-stay" value="1" @if(empty($stay) || $stay==1) selected @endif>1泊
 							</option>
 							<option class="input-stay" value="2" @if(!empty($stay) && $stay==2) selected @endif>2泊

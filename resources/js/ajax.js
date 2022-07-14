@@ -24,7 +24,7 @@ $(function () {
         roomGet(isThis);
     });
     
-    $("[name='people']").on("change", function () {
+    $("[name = 'people']").on("change", function () {
         if ($("#reservation .day").hasClass("select")) {
             let isThis = $("#reservation .day.select");
             roomGet(isThis);
@@ -38,7 +38,7 @@ $(function () {
         }
     });
 
-    // 部屋選択時、日付選択で自動的に予約フォームにページを送る
+    // 部屋選択後、日付選択で自動的に予約フォームにページを送る
     $("#room-detail .day").on("click", function () {
         if (!$(this).hasClass("hidden")) {
             $(".select").removeClass("select");
@@ -63,7 +63,7 @@ $(function () {
         totalGetPrice();
     });
 
-    $("[name = 'stay']").on("change", function () {
+    $("#reserveStay").on("change", function () {
         totalGetPrice();
     });
 
@@ -156,7 +156,7 @@ $(function () {
 
     function totalGetPrice() {
         let select_day = $("input[name='arrival']").val();
-        stay = $("[name='stay']").val();
+        stay = $("#reserveStay").val();
         people = $("input[name='people']:checked").val();
 
         if (select_day != "" && people != "" && stay != "") {
