@@ -357,6 +357,7 @@ textarea {
     width: 100%;
   }
   #header .sp-menu .sp-menu--nav .sp-menu--parts .sp-menu--list {
+    cursor: pointer;
     font-size: 18px;
     list-style-type: none;
     padding: 0;

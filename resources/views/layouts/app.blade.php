@@ -28,6 +28,7 @@
     <header id="header">
         <a href="{{ route('top') }}"><img class="logo" src="{{ asset('img/logo.png') }}" alt="logo"></a>
 
+        @if(Request::is('/'))
         <div class="sp-menu">
             <div class="hamburger">
                 <span></span>
@@ -45,11 +46,12 @@
                 </ul>
             </nav>
         </div>
+        @endif
     </header>
 
     <!-- Page Content -->
     @yield('content')
-    
+
     <footer id="footer">
         <p class="name">&copy; F HOTEL</p>
         @if(Request::is('/'))
