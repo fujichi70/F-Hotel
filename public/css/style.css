@@ -275,6 +275,15 @@ textarea {
   background-color: rgb(250, 235, 215);
 }
 
+.user-main--btn {
+  background-color: rgb(0, 51, 35);
+  position: absolute;
+  bottom: 0;
+  padding: 5px 10px;
+  border: 1px solid rgb(250, 235, 215);
+  color: rgb(250, 235, 215);
+}
+
 /*   header   */
 #header .logo {
   margin: 10px;
@@ -557,16 +566,16 @@ textarea {
 }
 #main .main-grid .middle-center img {
   opacity: 0;
-  -webkit-animation: display_appear 16s infinite;
-          animation: display_appear 16s infinite;
+  -webkit-animation: display_appear 11s infinite;
+          animation: display_appear 11s infinite;
 }
 #main .main-grid .middle-center img:nth-child(1) {
-  -webkit-animation-delay: 8s;
-          animation-delay: 8s;
+  -webkit-animation-delay: 5s;
+          animation-delay: 5s;
 }
 #main .main-grid .middle-center img:nth-child(2) {
-  -webkit-animation-delay: 16s;
-          animation-delay: 16s;
+  -webkit-animation-delay: 10s;
+          animation-delay: 10s;
 }
 #main .main-grid .middle-right {
   position: relative;
@@ -1316,6 +1325,7 @@ textarea {
 }
 
 #footer {
+  position: relative;
   width: 100%;
   bottom: 0;
   background: rgb(0, 51, 35);
@@ -1526,8 +1536,36 @@ textarea {
   cursor: pointer;
   font-size: 15px;
 }
+.calendar .calendar-header .btn-left {
+  position: relative;
+}
+.calendar .calendar-header .btn-left::before {
+  content: "";
+  position: absolute;
+  top: 43%;
+  left: -15%;
+  width: 7px;
+  height: 7px;
+  border-bottom: 1px solid rgb(0, 75, 50);
+  border-left: 1px solid rgb(0, 75, 50);
+  transform: rotate(45deg);
+}
 .calendar .calendar-header .btn-left:hover {
   transform: scale(1.08);
+}
+.calendar .calendar-header .btn-right {
+  position: relative;
+}
+.calendar .calendar-header .btn-right::after {
+  content: "";
+  position: absolute;
+  top: 43%;
+  right: -15%;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid rgb(0, 75, 50);
+  border-right: 1px solid rgb(0, 75, 50);
+  transform: rotate(45deg);
 }
 .calendar .calendar-header .btn-right:hover {
   transform: scale(1.08);

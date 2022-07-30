@@ -413,6 +413,6 @@
 		<img class="access-img" src="{{ asset('img/access.png') }}" alt="">
 		<img class="access-sp-img" src="{{ asset('img/access-sp.png') }}" alt="">
 	</div>
-
 </section>
+
 @endsection

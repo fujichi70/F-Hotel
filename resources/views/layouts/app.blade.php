@@ -37,11 +37,11 @@
 
             <nav class="sp-menu--nav">
                 <ul class="sp-menu--parts">
-                    <li class="sp-menu--list"><a href="#">room</a></li>
-                    <li class="sp-menu--list"><a href="#">restaurant</a></li>
-                    <li class="sp-menu--list"><a href="#">spa</a></li>
-                    <li class="sp-menu--list"><a href="#">services</a></li>
-                    <li class="sp-menu--list"><a href="#">access</a></li>
+                    <li class="sp-menu--list">room</li>
+                    <li class="sp-menu--list">restaurant</li>
+                    <li class="sp-menu--list">spa</li>
+                    <li class="sp-menu--list">services</li>
+                    <li class="sp-menu--list">access</li>
                 </ul>
             </nav>
         </div>
@@ -49,9 +49,12 @@
 
     <!-- Page Content -->
     @yield('content')
-
+    
     <footer id="footer">
         <p class="name">&copy; F HOTEL</p>
+        @if(Request::is('/'))
+        <a class="user-main--btn" href="{{ route('user') }}">従業員専用</a>
+        @endif
     </footer>
     @yield('js')
 </body>

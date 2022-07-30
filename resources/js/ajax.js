@@ -111,9 +111,9 @@ $(function () {
                         <h4 class="reservation-room--name" data-en="${topUppercase(
                             room.name
                         )}">${room.room_name}</h4>
-                        <img src="/storage/images/${room.img_path}" alt="${
-                            room.name
-                        }">
+                        <img src="https://f-hotel.fujichi.com/img/room/${
+                            room.img_path
+                        }" alt="${room.name}">
                         <dl class="room-flex">
                             <dt>ベッド</dt>
                             <dd>${room.type}</dd>

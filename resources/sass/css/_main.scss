@@ -154,11 +154,11 @@
 
             img {
                 opacity: 0;
-                animation: display_appear 16s infinite;
+                animation: display_appear 11s infinite;
 
                 @for $i from 1 through 2 {
                     &:nth-child(#{$i}) {
-                        animation-delay: $i * 8s;
+                        animation-delay: $i * 5s;
                     }
                 }
             }

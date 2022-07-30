@@ -52,12 +52,10 @@
 				<div class="calendar">
 					<div class="calendar-header text-center">
 						<a class="calendar-btn btn-left"
-							href="{{ url('/reservation?date=' . $calendar->getPreviousMonth()) }}"><i
-								class="fa-solid fa-angles-left"></i>前の月</a>
+							href="{{ url('/reservation?date=' . $calendar->getPreviousMonth()) }}">前の月</a>
 						<span class="calendar-main--title">{{ $calendar->getTitle() }}</span>
 						<a class="calendar-btn btn-right"
-							href="{{ url('/reservation?date=' . $calendar->getNextMonth()) }}">次の月<i
-								class="fa-solid fa-angles-right arrow"></i></a>
+							href="{{ url('/reservation?date=' . $calendar->getNextMonth()) }}">次の月</a>
 					</div>
 					<div class="calendar-body">
 						{!! $calendar->render() !!}
@@ -76,7 +74,7 @@
 								$room->room_name
 								}}
 							</h4>
-							<img src="/storage/images/{{ $room->img_path }}" alt="{{ $room->name }}">
+							<img src="https://f-hotel.fujichi.com/img/room/{{ $room->img_path }}" alt="{{ $room->name }}">
 							<dl class="room-flex">
 								<dt>ベッド</dt>
 								<dd>{{ $room->type }}</dd>

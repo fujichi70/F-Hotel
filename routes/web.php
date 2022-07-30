@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\ReserveController;
 use Illuminate\Support\Facades\Route;

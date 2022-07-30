@@ -10948,9 +10948,6 @@ $(function () {
   $(window).on("scroll", function () {
     windowHeight = $(window).height();
     scroll = $(window).scrollTop();
-    var scrollHeight = $(document).height();
-    var scrollPosition = windowHeight + scroll;
-    var footHeight = $("#footer").innerHeight();
 
     if (scroll > 100) {
       $(".scroll-arrow").hide();
@@ -10974,6 +10971,22 @@ $(function () {
     $(window).scrollTop($("#service").position().top);
   });
   $(".main-menu--list").eq(4).on("click", function () {
+    $(window).scrollTop($("#access").position().top);
+  }); // セクション遷移(sp)
+
+  $(".sp-menu--list").eq(0).on("click", function () {
+    $(window).scrollTop($("#room").position().top);
+  });
+  $(".sp-menu--list").eq(1).on("click", function () {
+    $(window).scrollTop($("#restaurant").position().top);
+  });
+  $(".sp-menu--list").eq(2).on("click", function () {
+    $(window).scrollTop($("#spa").position().top);
+  });
+  $(".sp-menu--list").eq(3).on("click", function () {
+    $(window).scrollTop($("#service").position().top);
+  });
+  $(".sp-menu--list").eq(4).on("click", function () {
     $(window).scrollTop($("#access").position().top);
   }); // トップに戻る
 

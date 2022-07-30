@@ -12,7 +12,7 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('login') }}">
+        <form class="mb-4" method="POST" action="{{ route('login') }}">
             @csrf
 
             <!-- Email Address -->
@@ -35,7 +35,7 @@
             <!-- Remember Me -->
             <div class="block mt-4">
                 <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
+                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-green-600 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50" name="remember">
                     <span class="ml-2 text-sm text-gray-600">ログイン状態にする</span>
                 </label>
             </div>
@@ -55,5 +55,12 @@
                 </x-button>
             </div>
         </form>
+        <hr>
+        <div class="mt-4">
+            <h2 class="text-green-900">サンプル</h2>
+            <p>メールアドレス：test@test.com</p>
+            <p>パスワード：password123</p>
+            <p>ログイン名：test</p>
+        </div>
     </x-auth-card>
 </x-guest-layout>
